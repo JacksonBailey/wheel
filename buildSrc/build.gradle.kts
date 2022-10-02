@@ -1,5 +1,12 @@
 plugins {
+    idea
     `kotlin-dsl`
+}
+
+idea {
+    module {
+        isDownloadSources = true
+    }
 }
 
 repositories {

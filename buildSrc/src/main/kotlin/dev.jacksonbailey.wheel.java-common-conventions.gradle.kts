@@ -1,4 +1,5 @@
 plugins {
+    id("dev.jacksonbailey.wheel.base-common-conventions")
     java
     `maven-publish`
 }
