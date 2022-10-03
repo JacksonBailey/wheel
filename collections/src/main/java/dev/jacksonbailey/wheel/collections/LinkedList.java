@@ -1,4 +1,4 @@
-package dev.jacksonbailey.wheel.list;
+package dev.jacksonbailey.wheel.collections;
 
 /**
  * A simple implementation of a linked list. Included to show how multiple modules work within
