@@ -1,2 +1,2 @@
 rootProject.name = "wheel"
-include("app", "list", "utilities")
+include("app", "list", "platform", "utilities")

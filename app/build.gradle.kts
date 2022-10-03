@@ -4,8 +4,10 @@ plugins {
 }
 
 dependencies {
+    implementation(platform(project(":platform")))
     implementation("org.apache.commons:commons-text")
     implementation(project(":utilities"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
 application {
