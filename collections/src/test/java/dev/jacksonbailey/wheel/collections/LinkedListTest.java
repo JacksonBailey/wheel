@@ -1,4 +1,4 @@
-package dev.jacksonbailey.wheel.list;
+package dev.jacksonbailey.wheel.collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
