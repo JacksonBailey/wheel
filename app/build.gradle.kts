@@ -1,5 +1,6 @@
 plugins {
     id("dev.jacksonbailey.wheel.java-application-conventions")
+    id("dev.jacksonbailey.wheel.shut-up-javadoc")
 }
 
 dependencies {
