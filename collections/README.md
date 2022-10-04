@@ -50,37 +50,3 @@ The core of this is when an interface has conceptually more methods but cannot b
 contract of the interface with conceptually fewer methods. Modifiable collections have more methods
 than unmodifiable ones but because they can be modified they cannot behave under the "unmodifiable"
 part.
-
-### The problem with modifiable hierarchy
-
-A quick illustration of why modifiable and unmodifiable cannot be part of the interface hierarchy
-for collections. You have to accept one of the corners because either modifiable extends
-unmodifiable (the naive approach because there are more methods) or unmodifiable extends modifiable.
-Effectively Java uses that second approach. You can call `Collections.unmodifiable...` to make
-something unmodifiable. You'll get errors if you try to modify it.
-
-|            | Expect mod | Expect unmod    |
-|------------|------------|-----------------|
-| Give mod   | Okay       | Not thread safe |
-| Give unmod | Errors     | Okay            |
-
-### The problem with capacity-restricted hierarchy
-
-Counter intuitively you can have uncapped extend capped. A simple way to understand this is checking
-if an infinitely large container is full before you put something in it. Was it a waste of time?
-Technically, sure, but you didn't break anything.
-
-|               | Expect capped  | Expect uncapped |
-|---------------|----------------|-----------------|
-| Give capped   | Okay           | Errors          |
-| Give uncapped | Actually okay! | Okay            |
-
-### The "problem" with distinctness
-
-It's actually not a problem but I am visually showing that unique collections (like `Set`) should
-indeed extend from non-unique ones (like `Collection`).
-
-|                 | Expect unique | Expect duplicates |
-|-----------------|---------------|-------------------|
-| Give unique     | Okay          | Actually okay!    |
-| Give duplicates | Errors        | Okay              |
