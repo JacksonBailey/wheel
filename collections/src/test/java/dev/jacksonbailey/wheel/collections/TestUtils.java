@@ -5,14 +5,16 @@ import static org.mockito.Mockito.mock;
 
 public final class TestUtils {
 
-  private TestUtils() {}
+  private TestUtils() {
+  }
 
-  // Author: Alex Objelean https://stackoverflow.com/users/859314
-  // Source: https://stackoverflow.com/a/54328868/1858327
-  // License: https://creativecommons.org/licenses/by-sa/4.0/
   /**
    * This method overcomes the issue with the original {@link org.mockito.Mockito#spy(Object)} when
    * passing a lambda which fails with an error saying that the passed class is final.
+   *
+   * @author Originally <a href="https://stackoverflow.com/users/859314">Alex Objelean</a>'s
+   * <a href="https://stackoverflow.com/a/54328868/1858327">code</a> licensed under <a
+   * href="https://creativecommons.org/licenses/by-sa/4.0/">CC-BY-SA 4.0</a>
    */
   @SuppressWarnings("unchecked")
   public static <R, P extends R> P spyLambda(final Class<R> lambdaType, final P lambda) {

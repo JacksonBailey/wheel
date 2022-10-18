@@ -1,12 +1,9 @@
 package dev.jacksonbailey.wheel.collections;
 
 import static dev.jacksonbailey.wheel.collections.TestUtils.spyLambda;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.AdditionalAnswers.delegatesTo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -49,7 +46,8 @@ class BagsTest {
   }
 
   @ParameterizedTest
-  @MethodSource("provideArguments") // TODO Better name or messaging for this
+  @MethodSource("provideArguments")
+    // TODO Better name or messaging for this
   void andAcrossTruesNoShortCircuit(boolean useAnd, boolean shortCircuit,
       Iterable<Boolean> bagElements,
       boolean expectedResult, int expectedInvocations) {

@@ -120,7 +120,7 @@ I'm not worried about it yet... but I do want to try to include it.
 
 ### Chain
 
-- ~~Does not actually extend stack~~ Because `Stack` is specified to do not necesscarily behave like
+- ~~Does not actually extend stack~~ Because `Stack` is specified to do not necessarily behave like
   a stack (while `ProperStack` does) this can behave how it should.
 - Tail is called last
 - Head is called first

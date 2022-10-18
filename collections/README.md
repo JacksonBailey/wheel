@@ -20,11 +20,11 @@ This specific project focuses on collections.
 For reference.
 
 - Iterable -> Collection
-  - List
-  - Queue -> Deque
-  - Set -> SortedSet -> NavigableSet
+    - List
+    - Queue -> Deque
+    - Set -> SortedSet -> NavigableSet
 - Map -> SortedMap -> NavigableMap -v
-  - ConcurrentMap -> ConcurrentNavigableMap
+    - ConcurrentMap -> ConcurrentNavigableMap
 
 ## Design
 
