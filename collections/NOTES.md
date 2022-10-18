@@ -5,7 +5,7 @@ Introduction
 ------------
 
 For a subtype to behave correctly it doesn't only matter that Java considers it valid (e.g.,
-syntax). What also matters is are the specifications. Java doesn't have a way to enforce that so it
+syntax). What also matters is are the specifications. Java doesn't have a way to enforce that, so it
 needs to be done carefully.
 
 Consider this bad example of Stacks and queues. They both act as Stacks and Queues. Everything below
@@ -58,8 +58,8 @@ class Caller {
 Specifications
 --------------
 
-A type `Sub` is a behavioral subtype of a type `Type` if each behavior allowed by the specification
-of `Sub` is also allowed by the specification of `Type`.  More elegantly, for type `Sub` to be a
+A type `Sub` is a behavioral subtype of a type `Super` if each behavior allowed by the specification
+of `Sub` is also allowed by the specification of `Super`. More elegantly, for type `Sub` to be a
 behavioral subtype of type `Super`, [ref][2]
 
 1. `Sub`'s invariants imply `Super`'s invariants. ***This means stronger invariants.***
@@ -100,7 +100,7 @@ interface OnlyWhenSuperApplies extends Base {
   /**
    * Pre-condition: true (all values supported)
    * Post-condition: return == x
-   *
+   * <p>
    * The post-condition is weaker but this is still a behavioral subtype. When Base's
    * pre-conditions are true (x >= 0) this post-condition is effectively return >= 0 which implies
    * the supertype's (because it is the same -- but if the effective post-condition were stronger it
@@ -250,4 +250,5 @@ interface Uncapped extends Capped {
 4. I'm totally ignoring capped and uncapped because it's confusing. Maybe I'll have an epiphany.
 
 [1]: https://en.wikipedia.org/wiki/Behavioral_subtyping
+
 [2]: https://dr.lib.iastate.edu/entities/publication/a928e154-7899-493f-ad0d-5b81ec34c6e9
