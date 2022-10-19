@@ -31,6 +31,14 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
+            pom {
+                licenses {
+                    license {
+                        name.set("AGPL-3.0-or-later")
+                        url.set("https://www.gnu.org/licenses/agpl.txt")
+                    }
+                }
+            }
         }
     }
 }
