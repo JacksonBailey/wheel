@@ -31,6 +31,14 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
+            pom {
+                licenses {
+                    license {
+                        name.set("LGPL-3.0-or-later")
+                        url.set("https://www.gnu.org/licenses/lgpl-3.0.txt")
+                    }
+                }
+            }
         }
     }
 }
