@@ -13,10 +13,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class VBagTest {
+class AbstractVBagTest {
 
   @Mock(answer = Answers.CALLS_REAL_METHODS)
-  VBag<Integer> bag;
+  AbstractVBag<Integer> bag;
 
   @Test
   void emptyTest() {
@@ -43,19 +43,17 @@ class VBagTest {
   }
 
   @Test
-  @SuppressWarnings("unchecked")
   void containsAll() {
     given(bag.iterator()).willReturn(List.of(1, 2).iterator());
-    VBag<Integer> input = mock(VBag.class);
+    var input = mock(AbstractVBag.class);
     given(input.iterator()).willReturn(List.of(1, 2).iterator());
     assertTrue(bag.containsAll(input));
   }
 
   @Test
-  @SuppressWarnings("unchecked")
-  void notCotainsAll() {
+  void notContainsAll() {
     given(bag.iterator()).willReturn(List.of(1, 2).iterator());
-    VBag<Integer> input = mock(VBag.class);
+    var input = mock(AbstractVBag.class);
     given(input.iterator()).willReturn(List.of(1, 2, 3).iterator());
     assertFalse(bag.containsAll(input));
   }

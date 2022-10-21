@@ -1,6 +1,9 @@
 package dev.jacksonbailey.wheel.collections;
 
 import dev.jacksonbailey.wheel.collections.viewable.VBag;
+import dev.jacksonbailey.wheel.collections.viewable.VChain;
+import dev.jacksonbailey.wheel.collections.viewable.VPile;
+import dev.jacksonbailey.wheel.collections.viewable.VSuccession;
 import java.util.function.Predicate;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,4 +28,6 @@ public final class Bags {
     }
     return result;
   }
+
+
 }

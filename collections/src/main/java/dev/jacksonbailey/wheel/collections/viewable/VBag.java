@@ -4,11 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import dev.jacksonbailey.wheel.collections.Bags;
 import dev.jacksonbailey.wheel.collections.Walkable;
+import dev.jacksonbailey.wheel.collections.modifiable.Bag;
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public interface VBag<E> extends Walkable<E> {
+public sealed interface VBag<E> extends Walkable<E> permits AbstractVBag, VSuccession, VPile, Bag {
 
   int size();
 

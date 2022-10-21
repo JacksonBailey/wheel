@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * In general these methods return true if the bag is modified.
  */
-public interface Bag<E> extends VBag<E> {
+public sealed interface Bag<E> extends VBag<E> permits AbstractBag, Succession, Pile {
 
   boolean add(@NotNull E e);
 

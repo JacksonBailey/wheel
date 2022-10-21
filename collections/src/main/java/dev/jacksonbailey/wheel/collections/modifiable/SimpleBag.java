@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Reference implementation of bag.
  */
-public class SimpleBag<E> implements Bag<E> {
+public class SimpleBag<E> extends AbstractBag<E> {
 
   private final @NotNull ArrayList<E> list;
 

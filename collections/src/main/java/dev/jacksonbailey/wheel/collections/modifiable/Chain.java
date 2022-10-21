@@ -4,7 +4,7 @@ import dev.jacksonbailey.wheel.collections.viewable.VChain;
 import java.util.Iterator;
 import org.jetbrains.annotations.NotNull;
 
-public interface Chain<E> extends VChain<E>, Succession<E>, Pile<E> {
+public sealed interface Chain<E> extends VChain<E>, Succession<E>, Pile<E> permits AbstractChain {
 
   // Adds at tail
   @Override

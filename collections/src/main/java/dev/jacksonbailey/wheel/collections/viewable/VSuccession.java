@@ -1,11 +1,13 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
 import dev.jacksonbailey.wheel.collections.Walker;
+import dev.jacksonbailey.wheel.collections.modifiable.Succession;
 import java.util.Iterator;
 import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
-public interface VSuccession<E> extends VBag<E> {
+public sealed interface VSuccession<E> extends VBag<E>
+    permits AbstractVSuccession, VChain, Succession {
 
   // TODO Rename to get()?
   default @NotNull Optional<E> element() {

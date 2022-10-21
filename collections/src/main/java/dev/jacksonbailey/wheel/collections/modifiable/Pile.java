@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Last in, first out. Adds at tail/last and removes from head/first.
  */
-public interface Pile<E> extends VPile<E>, Bag<E> {
+public sealed interface Pile<E> extends VPile<E>, Bag<E> permits AbstractPile, Chain {
 
   // TODO push and pop?
 

@@ -1,11 +1,12 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
 import dev.jacksonbailey.wheel.collections.Walker;
+import dev.jacksonbailey.wheel.collections.modifiable.Pile;
 import java.util.Iterator;
 import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
-public interface VPile<E> extends VBag<E> {
+public sealed interface VPile<E> extends VBag<E> permits AbstractVPile, VChain, Pile {
 
   @NotNull Optional<E> getLast();
 
