@@ -1,7 +1,6 @@
 plugins {
     id("dev.jacksonbailey.wheel.base-common-conventions")
     java
-    `maven-publish`
 }
 
 repositories {
@@ -31,14 +30,10 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
-            pom {
-                licenses {
-                    license {
-                        name.set("LGPL-3.0-or-later")
-                        url.set("https://www.gnu.org/licenses/lgpl-3.0.txt")
-                    }
-                }
-            }
         }
     }
+}
+
+signing {
+    sign(publishing.publications["mavenJava"])
 }

@@ -1,6 +1,6 @@
 plugins {
+    id("dev.jacksonbailey.wheel.base-common-conventions")
     `java-platform`
-    `maven-publish`
 }
 
 javaPlatform {
@@ -14,8 +14,12 @@ dependencies {
 
 publishing {
     publications {
-        create<MavenPublication>("platform") {
+        create<MavenPublication>("mavenPlatform") {
             from(components["javaPlatform"])
         }
     }
+}
+
+signing {
+    sign(publishing.publications["mavenPlatform"])
 }
