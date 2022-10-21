@@ -1,13 +1,13 @@
 package dev.jacksonbailey.wheel.collections.modifiable;
 
-import dev.jacksonbailey.wheel.collections.viewable.ViewablePile;
+import dev.jacksonbailey.wheel.collections.viewable.VPile;
 import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Last in, first out. Adds at tail/last and removes from head/first.
  */
-public interface Pile<E> extends ViewablePile<E>, Bag<E> {
+public interface Pile<E> extends VPile<E>, Bag<E> {
 
   // TODO push and pop?
 

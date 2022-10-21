@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
-public interface ViewableSuccession<E> extends ViewableBag<E> {
+public interface VSuccession<E> extends VBag<E> {
 
   // TODO Rename to get()?
   default @NotNull Optional<E> element() {
@@ -15,7 +15,7 @@ public interface ViewableSuccession<E> extends ViewableBag<E> {
   @NotNull Optional<E> getFirst();
 
   @Override
-  @NotNull ViewableSuccession<E> shallowCopy();
+  @NotNull VSuccession<E> shallowCopy();
 
   // Walks head to tail
   @Override

@@ -1,7 +1,7 @@
 package dev.jacksonbailey.wheel.collections.modifiable;
 
 import dev.jacksonbailey.wheel.collections.Walker;
-import dev.jacksonbailey.wheel.collections.viewable.ViewableSuccession;
+import dev.jacksonbailey.wheel.collections.viewable.VSuccession;
 import java.util.Iterator;
 import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * First in, first out. Adds at tail/last and removes from head/first.
  */
-public interface Succession<E> extends ViewableSuccession<E>, Bag<E> {
+public interface Succession<E> extends VSuccession<E>, Bag<E> {
 
   // Adds at tail
   @Override

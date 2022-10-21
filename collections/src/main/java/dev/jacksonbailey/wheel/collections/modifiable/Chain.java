@@ -1,10 +1,10 @@
 package dev.jacksonbailey.wheel.collections.modifiable;
 
-import dev.jacksonbailey.wheel.collections.viewable.ViewableChain;
+import dev.jacksonbailey.wheel.collections.viewable.VChain;
 import java.util.Iterator;
 import org.jetbrains.annotations.NotNull;
 
-public interface Chain<E> extends ViewableChain<E>, Succession<E>, Pile<E> {
+public interface Chain<E> extends VChain<E>, Succession<E>, Pile<E> {
 
   // Adds at tail
   @Override

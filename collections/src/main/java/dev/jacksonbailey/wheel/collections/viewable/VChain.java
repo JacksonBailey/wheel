@@ -3,10 +3,10 @@ package dev.jacksonbailey.wheel.collections.viewable;
 import java.util.Iterator;
 import org.jetbrains.annotations.NotNull;
 
-public interface ViewableChain<E> extends ViewableSuccession<E>, ViewablePile<E> {
+public interface VChain<E> extends VSuccession<E>, VPile<E> {
 
   @Override
-  @NotNull ViewableChain<E> shallowCopy();
+  @NotNull VChain<E> shallowCopy();
 
   // Iterates head to tail
   @Override

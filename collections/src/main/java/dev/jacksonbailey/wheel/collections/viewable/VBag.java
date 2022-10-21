@@ -8,7 +8,7 @@ import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public interface ViewableBag<E> extends Walkable<E> {
+public interface VBag<E> extends Walkable<E> {
 
   int size();
 
@@ -23,10 +23,10 @@ public interface ViewableBag<E> extends Walkable<E> {
     return Bags.applyAcrossAll(this, false, true, e -> Objects.equals(e, o));
   }
 
-  default boolean containsAll(@NotNull ViewableBag<?> b) {
+  default boolean containsAll(@NotNull VBag<?> b) {
     return Bags.applyAcrossAll(requireNonNull(b), true, true, this::contains);
   }
 
-  @NotNull ViewableBag<E> shallowCopy();
+  @NotNull VBag<E> shallowCopy();
 
 }
