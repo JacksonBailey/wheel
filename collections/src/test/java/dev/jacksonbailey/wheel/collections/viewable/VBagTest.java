@@ -13,10 +13,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-class ViewableBagTest {
+class VBagTest {
 
   @Mock(answer = Answers.CALLS_REAL_METHODS)
-  ViewableBag<Integer> bag;
+  VBag<Integer> bag;
 
   @Test
   void emptyTest() {
@@ -46,7 +46,7 @@ class ViewableBagTest {
   @SuppressWarnings("unchecked")
   void containsAll() {
     given(bag.iterator()).willReturn(List.of(1, 2).iterator());
-    ViewableBag<Integer> input = mock(ViewableBag.class);
+    VBag<Integer> input = mock(VBag.class);
     given(input.iterator()).willReturn(List.of(1, 2).iterator());
     assertTrue(bag.containsAll(input));
   }
@@ -55,7 +55,7 @@ class ViewableBagTest {
   @SuppressWarnings("unchecked")
   void notCotainsAll() {
     given(bag.iterator()).willReturn(List.of(1, 2).iterator());
-    ViewableBag<Integer> input = mock(ViewableBag.class);
+    VBag<Integer> input = mock(VBag.class);
     given(input.iterator()).willReturn(List.of(1, 2, 3).iterator());
     assertFalse(bag.containsAll(input));
   }

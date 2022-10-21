@@ -5,12 +5,12 @@ import java.util.Iterator;
 import java.util.Optional;
 import org.jetbrains.annotations.NotNull;
 
-public interface ViewablePile<E> extends ViewableBag<E> {
+public interface VPile<E> extends VBag<E> {
 
   @NotNull Optional<E> getLast();
 
   @Override
-  @NotNull ViewablePile<E> shallowCopy();
+  @NotNull VPile<E> shallowCopy();
 
   // Does not necessarily iterate in any order, *wink*
   @Override

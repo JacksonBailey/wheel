@@ -3,7 +3,7 @@ package dev.jacksonbailey.wheel.collections.modifiable;
 import static java.util.Objects.requireNonNull;
 
 import dev.jacksonbailey.wheel.collections.Bags;
-import dev.jacksonbailey.wheel.collections.viewable.ViewableBag;
+import dev.jacksonbailey.wheel.collections.viewable.VBag;
 import java.util.function.Predicate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * In general these methods return true if the bag is modified.
  */
-public interface Bag<E> extends ViewableBag<E> {
+public interface Bag<E> extends VBag<E> {
 
   boolean add(@NotNull E e);
 
