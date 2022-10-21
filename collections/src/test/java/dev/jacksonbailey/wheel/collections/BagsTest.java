@@ -7,7 +7,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import dev.jacksonbailey.wheel.collections.modifiable.Bag;
+import dev.jacksonbailey.wheel.collections.modifiable.AbstractBag;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -22,7 +22,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class BagsTest {
 
   @Mock
-  Bag<Boolean> bag;
+  AbstractBag<Boolean> bag;
 
   static Stream<Arguments> provideArguments() {
     return Stream.of(
