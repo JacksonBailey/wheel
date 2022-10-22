@@ -1,5 +1,41 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
-public abstract non-sealed class AbstractVChain<E> implements VChain<E> {
+import dev.jacksonbailey.wheel.collections.Bags;
+import java.util.Objects;
+
+public abstract non-sealed class AbstractVChain<E> extends AbstractVSuccession<E>
+    implements VChain<E> {
+
+  /**
+   * {@inheritDoc}
+   *
+   * @param o {@inheritDoc}
+   * @return {@inheritDoc}
+   */
+  @Override
+  public boolean equals(Object o) {
+
+    if (o == this) {
+      return true;
+    }
+
+    if (o instanceof VChain<?> chain) { // TODO And NOT some other type of bag
+      return Bags.containsInOrder(walker(), chain.walker());
+    }
+
+    return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @implNote This currently has the same implementation as {@link AbstractVBag#hashCode()}.
+   *
+   * @return {@inheritDoc}
+   */
+  @Override
+  public int hashCode() {
+    return Bags.hashingInOrder(walker());
+  }
 
 }
