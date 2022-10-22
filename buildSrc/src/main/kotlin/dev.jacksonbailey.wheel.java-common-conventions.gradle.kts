@@ -15,6 +15,9 @@ tasks {
     named<Test>("test") {
         useJUnitPlatform()
     }
+    assemble {
+        dependsOn(tasks.withType<GenerateMavenPom>(), tasks.withType<GenerateModuleMetadata>())
+    }
 }
 
 publishing {
