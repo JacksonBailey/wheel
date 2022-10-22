@@ -55,7 +55,6 @@ shallowCopy() VBag~E~
 
 class VSuccession~E~ {
 <<interface>>
-element() Optional~E~
 getFirst() Optional~E~
 shallowCopy() VSuccession~E~
 walker() Walker~E~
