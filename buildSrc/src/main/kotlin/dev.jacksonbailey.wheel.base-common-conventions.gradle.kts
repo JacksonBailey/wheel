@@ -10,11 +10,17 @@ idea {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
 extra["isReleaseVersion"] = !version.toString().endsWith("SNAPSHOT")
 
 tasks {
     withType<Sign>().configureEach {
-        onlyIf { project.extra["isReleaseVersion"] as Boolean }
+        onlyIf {
+            project.extra["isReleaseVersion"] as Boolean
+        }
     }
 }
 

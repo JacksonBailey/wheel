@@ -3,10 +3,6 @@ plugins {
     java
 }
 
-repositories {
-    mavenCentral()
-}
-
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(19))
@@ -16,11 +12,9 @@ java {
 }
 
 tasks {
-
     named<Test>("test") {
         useJUnitPlatform()
     }
-
     withType<JavaCompile>().configureEach {
         options.encoding = "UTF-8"
     }
