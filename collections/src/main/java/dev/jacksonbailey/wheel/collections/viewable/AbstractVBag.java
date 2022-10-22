@@ -1,6 +1,7 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
-import java.util.ArrayList;
+import dev.jacksonbailey.wheel.collections.Bags;
+import java.util.Objects;
 
 // TODO Consider making a non-sealed interface instead of an abstract non-sealed class
 
@@ -13,32 +14,39 @@ import java.util.ArrayList;
  */
 public abstract non-sealed class AbstractVBag<E> implements VBag<E> {
 
-  // TODO As far as I can tell there's no reason why this equals impl can't be on VBag? What was I thinking?
-
+  /**
+   * {@inheritDoc}
+   *
+   * @param o {@inheritDoc}
+   * @return {@inheritDoc}
+   */
   @Override
   public boolean equals(Object o) {
+
     if (o == this) {
       return true;
     }
-    if (o instanceof VBag<?> b) {
-      if (b instanceof VSuccession<?> || b instanceof VPile<?>) {
+
+    if (o instanceof VBag<?> bag) {
+
+      if (bag instanceof VSuccession<?> || bag instanceof VPile<?>) {
         return false;
       }
-      if (size() != b.size()) {
-        return false;
-      }
-      var thisList = new ArrayList<E>();
-      shallowCopy().forEach(thisList::add);
-      var thatList = new ArrayList<>();
-      b.forEach(thatList::add);
-      for (E e : thisList) {
-        if (!thatList.remove(e)) {
-          return false;
-        }
-      }
-      return true;
+
+      return Bags.containsExactlyAll(this, bag);
     }
+
     return false;
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @return {@inheritDoc}
+   */
+  @Override
+  public int hashCode() {
+    return Bags.hashingInOrder(walker());
   }
 
 }

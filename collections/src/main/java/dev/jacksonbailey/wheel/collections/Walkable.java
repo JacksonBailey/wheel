@@ -8,6 +8,8 @@ import org.jetbrains.annotations.NotNull;
 
 public interface Walkable<E> extends Iterable<E> {
 
+  // TODO Specify that Walkable and Walker make shallow copies?
+
   @NotNull Walker<E> walker();
 
   // TODO Iterator or Walker here?
