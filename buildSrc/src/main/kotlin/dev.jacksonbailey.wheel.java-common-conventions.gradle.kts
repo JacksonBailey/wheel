@@ -15,9 +15,6 @@ tasks {
     named<Test>("test") {
         useJUnitPlatform()
     }
-    withType<JavaCompile>().configureEach {
-        options.encoding = "UTF-8"
-    }
 }
 
 publishing {
