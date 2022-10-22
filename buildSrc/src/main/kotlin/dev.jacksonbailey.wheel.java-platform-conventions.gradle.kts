@@ -7,6 +7,12 @@ javaPlatform {
     allowDependencies()
 }
 
+tasks {
+    assemble {
+        dependsOn(tasks.withType<GenerateMavenPom>(), tasks.withType<GenerateModuleMetadata>())
+    }
+}
+
 publishing {
     publications {
         create<MavenPublication>("mavenPlatform") {
