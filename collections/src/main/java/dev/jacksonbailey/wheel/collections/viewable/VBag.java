@@ -28,6 +28,8 @@ import org.jetbrains.annotations.Nullable;
  */
 public sealed interface VBag<E> extends Walkable<E> permits VBagLeaf, VSuccession, VPile, Bag {
 
+  // TODO {@link foo(E)} seems like valid Javadoc, use it instead of foo(Object)
+
   /**
    * Returns the number of elements in this bag.
    *

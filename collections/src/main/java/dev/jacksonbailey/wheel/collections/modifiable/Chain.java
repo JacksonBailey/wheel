@@ -22,18 +22,58 @@ public sealed interface Chain<E> extends VChain<E>, Succession<E>, Pile<E> permi
   @Contract("!null -> _; null -> false")
   boolean remove(@Nullable Object o);
 
+  /**
+   * {@inheritDoc}
+   *
+   * @return {@inheritDoc}
+   */
   @Override
   @Contract("-> new")
   @NotNull Chain<E> shallowCopy();
 
-  // Walks head to tail
-  @Override
-  @NotNull Walker<E> walker();
-
-  // Iterates head to tail
+  /**
+   * Returns an iterator over the elements of this as a succession. The elements are ordered from
+   * head to tail.
+   *
+   * @return {@inheritDoc}
+   */
   @Override
   default @NotNull Iterator<E> iterator() {
     return walker();
   }
+
+  /**
+   * See {@link #iterator()} for details on the order.
+   *
+   * @return {@inheritDoc}
+   */
+  @Override
+  @NotNull Walker<E> walker();
+
+  // TODO Update last bullet point when needed
+  /**
+   * Compares the specified object with this for equality.
+   * <p>
+   * True if and only if
+   * <ul>
+   *   <li>{@code o} and this contain the same number of elements</li>
+   *   <li>For each element in {@code o} there is a corresponding element in this in the same position</li>
+   *   <li>{@code o} is a {@code VChain} and NOT a ...</li>
+   * </ul>
+   *
+   * @param o {@inheritDoc}
+   * @return {@inheritDoc}
+   */
+  @Override
+  @Contract("!null -> _; null -> false")
+  boolean equals(@Nullable Object o);
+
+  /**
+   * {@inheritDoc}
+   *
+   * @return {@inheritDoc}
+   */
+  @Override
+  int hashCode();
 
 }

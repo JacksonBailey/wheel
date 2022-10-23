@@ -35,7 +35,8 @@ public sealed interface VPile<E> extends VBag<E> permits VPileLeaf, VChain, Pile
   /**
    * {@inheritDoc}
    * <p>
-   * It is tempting to think that this iterates from head to tail. That is not necessarily true.
+   * It is tempting to think that this iterates from head to tail. That is not necessarily true. It
+   * should be considered random.
    *
    * @return {@inheritDoc}
    */
