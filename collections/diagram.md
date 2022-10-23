@@ -55,7 +55,7 @@ shallowCopy() VBag~E~
 
 class VSuccession~E~ {
 <<interface>>
-getFirst() Optional~E~
+getHead() Optional~E~
 shallowCopy() VSuccession~E~
 walker() Walker~E~
 iterator() Iterator~E~
@@ -63,6 +63,7 @@ iterator() Iterator~E~
 
 class VPile~E~ {
 <<interface>>
+getTail() Optional~E~
 shallowCopy() VPile~E~
 descendingWalker() Walker~E~
 descendingIterator() Iterator~E~
@@ -88,24 +89,24 @@ shallowCopy() Bag~E~
 class Succession~E~ {
 <<interface>>
 add(E e) boolean
-addLast(E e) boolean
+addTail(E e) boolean
 remove(Object o) boolean
+removeHead() Optional~E~
 removeFirstOccurrence(Object o) boolean
-removeFirst() Optional~E~
 shallowCopy() Succession~E~
 }
 
 class Pile~E~ {
 <<interface>>
-addLast(E e) boolean
+addTail(E e) boolean
+removeTail() Optional~E~
 removeLastOccurrence(Object o) boolean
-removeLast() Optional~E~
 shallowCopy() Pile~E~
 }
 
 class Chain~E~ {
 <<interface>>
-addFirst(E e) boolean
+addHead(E e) boolean
 shallowCopy() Chain~E~
 }
 ```

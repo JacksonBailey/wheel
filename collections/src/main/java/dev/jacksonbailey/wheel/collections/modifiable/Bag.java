@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import dev.jacksonbailey.wheel.collections.Bags;
 import dev.jacksonbailey.wheel.collections.viewable.VBag;
 import java.util.function.Predicate;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,6 +20,7 @@ public sealed interface Bag<E> extends VBag<E> permits BagLeaf, Succession, Pile
     return Bags.applyAcrossAll(requireNonNull(b), false, false, this::add);
   }
 
+  @Contract("!null -> _; null -> false")
   boolean remove(@Nullable Object o);
 
   default boolean removeAll(@NotNull Bag<?> b) {
@@ -43,6 +45,7 @@ public sealed interface Bag<E> extends VBag<E> permits BagLeaf, Succession, Pile
   }
 
   @Override
+  @Contract("-> new")
   @NotNull Bag<E> shallowCopy();
 
 }

@@ -4,6 +4,7 @@ import dev.jacksonbailey.wheel.collections.Walker;
 import dev.jacksonbailey.wheel.collections.viewable.VSuccession;
 import java.util.Iterator;
 import java.util.Optional;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,22 +16,25 @@ public sealed interface Succession<E> extends VSuccession<E>, Bag<E> permits Suc
   // Adds at tail
   @Override
   default boolean add(@NotNull E e) {
-    return addLast(e);
+    return addTail(e);
   }
 
-  boolean addLast(@NotNull E e);
+  boolean addTail(@NotNull E e);
 
   // Removes from head
   @Override
+  @Contract("!null -> _; null -> false")
   default boolean remove(@Nullable Object o) {
     return removeFirstOccurrence(o);
   }
 
-  @NotNull Optional<E> removeFirst();
-
+  @Contract("!null -> _; null -> false")
   boolean removeFirstOccurrence(@Nullable Object o);
 
+  @NotNull Optional<E> removeHead();
+
   @Override
+  @Contract("-> new")
   @NotNull Succession<E> shallowCopy();
 
   // Walks head to tail
