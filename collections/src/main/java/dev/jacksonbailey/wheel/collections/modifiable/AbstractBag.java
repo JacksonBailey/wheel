@@ -2,6 +2,6 @@ package dev.jacksonbailey.wheel.collections.modifiable;
 
 import dev.jacksonbailey.wheel.collections.viewable.AbstractVBag;
 
-public non-sealed abstract class AbstractBag<E> extends AbstractVBag<E> implements Bag<E> {
+public abstract class AbstractBag<E> extends AbstractVBag<E> implements BagLeaf<E> {
 
 }

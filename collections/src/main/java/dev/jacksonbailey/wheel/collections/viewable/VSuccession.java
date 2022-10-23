@@ -11,8 +11,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @param <E> the type of elements in the succession
  */
-public sealed interface VSuccession<E> extends VBag<E>
-    permits AbstractVSuccession, VChain, Succession {
+public sealed interface VSuccession<E> extends VBag<E> permits VSuccessionLeaf, VChain, Succession {
 
   /**
    * Returns an {@code Optional} of the head element in the succession. {@code Optional.empty()} if

@@ -1,9 +1,6 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
 import dev.jacksonbailey.wheel.collections.Bags;
-import java.util.Objects;
-
-// TODO Consider making a non-sealed interface instead of an abstract non-sealed class
 
 /**
  * Abstract bag.
@@ -12,7 +9,7 @@ import java.util.Objects;
  *
  * @param <E> the type of elements in the bag
  */
-public abstract non-sealed class AbstractVBag<E> implements VBag<E> {
+public abstract class AbstractVBag<E> implements VBagLeaf<E> {
 
   /**
    * {@inheritDoc}

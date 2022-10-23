@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @param <E> the type of elements in the pile
  */
-public sealed interface VPile<E> extends VBag<E> permits AbstractVPile, VChain, Pile {
+public sealed interface VPile<E> extends VBag<E> permits VPileLeaf, VChain, Pile {
 
   // TODO Double check there's no other "get last" type method on Stack or Deque
   /**

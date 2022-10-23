@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @param <E> the type of elements in the chain
  */
-public sealed interface VChain<E> extends VSuccession<E>, VPile<E> permits AbstractVChain, Chain {
+public sealed interface VChain<E> extends VSuccession<E>, VPile<E> permits VChainLeaf, Chain {
 
   /**
    * {@inheritDoc}

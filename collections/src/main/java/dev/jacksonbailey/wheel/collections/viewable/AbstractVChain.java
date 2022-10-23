@@ -1,10 +1,9 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
 import dev.jacksonbailey.wheel.collections.Bags;
-import java.util.Objects;
 
-public abstract non-sealed class AbstractVChain<E> extends AbstractVSuccession<E>
-    implements VChain<E> {
+public abstract class AbstractVChain<E> extends AbstractVSuccession<E>
+    implements VChainLeaf<E> {
 
   /**
    * {@inheritDoc}
