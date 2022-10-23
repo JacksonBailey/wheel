@@ -4,7 +4,9 @@ import dev.jacksonbailey.wheel.collections.Walker;
 import dev.jacksonbailey.wheel.collections.modifiable.Pile;
 import java.util.Iterator;
 import java.util.Optional;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Represents a viewable stack of elements using last in, first out semantics.
@@ -13,14 +15,13 @@ import org.jetbrains.annotations.NotNull;
  */
 public sealed interface VPile<E> extends VBag<E> permits VPileLeaf, VChain, Pile {
 
-  // TODO Double check there's no other "get last" type method on Stack or Deque
   /**
-   * Returns an {@code Optional} of the tail element in the pile.{@code Optional.empty()} if this
-   * {@code isEmpty()}.
+   * Returns an {@code Optional} of the tail element in the pile. {@code Optional.empty()} if this
+   * {@code isEmpty()}. The tail can be thought of as the end or the last element.
    *
    * @return an {@code Optional} of the tail element in the pile
    */
-  @NotNull Optional<E> getLast();
+  @NotNull Optional<E> getTail();
 
   /**
    * {@inheritDoc}
@@ -28,6 +29,7 @@ public sealed interface VPile<E> extends VBag<E> permits VPileLeaf, VChain, Pile
    * @return {@inheritDoc}
    */
   @Override
+  @Contract("-> new")
   @NotNull VPile<E> shallowCopy();
 
   /**
@@ -80,7 +82,8 @@ public sealed interface VPile<E> extends VBag<E> permits VPileLeaf, VChain, Pile
    * @return {@inheritDoc}
    */
   @Override
-  boolean equals(Object o);
+  @Contract("!null -> _; null -> false")
+  boolean equals(@Nullable Object o);
 
   /**
    * {@inheritDoc}

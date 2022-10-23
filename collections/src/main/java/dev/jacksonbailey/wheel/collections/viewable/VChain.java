@@ -3,7 +3,9 @@ package dev.jacksonbailey.wheel.collections.viewable;
 import dev.jacksonbailey.wheel.collections.Walker;
 import dev.jacksonbailey.wheel.collections.modifiable.Chain;
 import java.util.Iterator;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Represents a viewable double-ended queue of elements.
@@ -18,6 +20,7 @@ public sealed interface VChain<E> extends VSuccession<E>, VPile<E> permits VChai
    * @return {@inheritDoc}
    */
   @Override
+  @Contract("-> new")
   @NotNull VChain<E> shallowCopy();
 
   /**
@@ -54,7 +57,8 @@ public sealed interface VChain<E> extends VSuccession<E>, VPile<E> permits VChai
    * @return {@inheritDoc}
    */
   @Override
-  boolean equals(Object o);
+  @Contract("!null -> _; null -> false")
+  boolean equals(@Nullable Object o);
 
   /**
    * {@inheritDoc}

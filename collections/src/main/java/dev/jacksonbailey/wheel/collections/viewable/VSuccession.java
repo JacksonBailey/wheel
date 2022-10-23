@@ -4,7 +4,9 @@ import dev.jacksonbailey.wheel.collections.Walker;
 import dev.jacksonbailey.wheel.collections.modifiable.Succession;
 import java.util.Iterator;
 import java.util.Optional;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Represents a viewable queue of elements using first in, first out semantics.
@@ -15,11 +17,11 @@ public sealed interface VSuccession<E> extends VBag<E> permits VSuccessionLeaf, 
 
   /**
    * Returns an {@code Optional} of the head element in the succession. {@code Optional.empty()} if
-   * this {@code isEmpty()}.
+   * this {@code isEmpty()}. The head can be thought of as the front or the first element.
    *
    * @return an {@code Optional} of the head element in the succession
    */
-  @NotNull Optional<E> getFirst();
+  @NotNull Optional<E> getHead();
 
   /**
    * {@inheritDoc}
@@ -27,6 +29,7 @@ public sealed interface VSuccession<E> extends VBag<E> permits VSuccessionLeaf, 
    * @return {@inheritDoc}
    */
   @Override
+  @Contract("-> new")
   @NotNull VSuccession<E> shallowCopy();
 
   /**
@@ -62,7 +65,8 @@ public sealed interface VSuccession<E> extends VBag<E> permits VSuccessionLeaf, 
    * @return {@inheritDoc}
    */
   @Override
-  boolean equals(Object o);
+  @Contract("!null -> _; null -> false")
+  boolean equals(@Nullable Object o);
 
   /**
    * {@inheritDoc}

@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -50,6 +51,7 @@ public sealed interface VBag<E> extends Walkable<E> permits VBagLeaf, VSuccessio
    * @param o object to test the presence of
    * @return true if this bag contains {@code o}
    */
+  @Contract("!null -> _; null -> false")
   default boolean contains(@Nullable Object o) {
     if (o == null) {
       return false;
@@ -76,6 +78,7 @@ public sealed interface VBag<E> extends Walkable<E> permits VBagLeaf, VSuccessio
    *
    * @return the copy
    */
+  @Contract("-> new")
   @NotNull VBag<E> shallowCopy();
 
   /**
@@ -153,7 +156,8 @@ public sealed interface VBag<E> extends Walkable<E> permits VBagLeaf, VSuccessio
    * @return true if the object is equal to this
    */
   @Override
-  boolean equals(Object o);
+  @Contract("!null -> _; null -> false")
+  boolean equals(@Nullable Object o);
 
   /**
    * Returns the hash code.
