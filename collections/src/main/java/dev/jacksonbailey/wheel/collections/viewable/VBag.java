@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @param <E> the type of elements in the bag
  */
-public sealed interface VBag<E> extends Walkable<E> permits AbstractVBag, VSuccession, VPile, Bag {
+public sealed interface VBag<E> extends Walkable<E> permits VBagLeaf, VSuccession, VPile, Bag {
 
   /**
    * Returns the number of elements in this bag.

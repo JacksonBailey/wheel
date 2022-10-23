@@ -1,9 +1,8 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
 import dev.jacksonbailey.wheel.collections.Bags;
-import java.util.Objects;
 
-public abstract non-sealed class AbstractVPile<E> extends AbstractVBag<E> implements VPile<E> {
+public abstract class AbstractVPile<E> extends AbstractVBag<E> implements VPileLeaf<E> {
 
   /**
    * {@inheritDoc}

@@ -10,8 +10,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * First in, first out. Adds at tail/last and removes from head/first.
  */
-public sealed interface Succession<E> extends VSuccession<E>, Bag<E>
-    permits AbstractSuccession, Chain {
+public sealed interface Succession<E> extends VSuccession<E>, Bag<E> permits SuccessionLeaf, Chain {
 
   // Adds at tail
   @Override

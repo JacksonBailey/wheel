@@ -1,10 +1,8 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
 import dev.jacksonbailey.wheel.collections.Bags;
-import java.util.Objects;
 
-public abstract non-sealed class AbstractVSuccession<E> extends AbstractVBag<E>
-    implements VSuccession<E> {
+public abstract class AbstractVSuccession<E> extends AbstractVBag<E> implements VSuccessionLeaf<E> {
 
   /**
    * {@inheritDoc}
