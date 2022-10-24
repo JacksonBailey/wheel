@@ -10,7 +10,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public class DelegatingWalker<E> implements Walker<E> {
 
-  private final @NotNull Iterator<E> iterator;
+  @NotNull
+  private final Iterator<E> iterator;
 
   public DelegatingWalker(@NotNull Iterator<E> iterator) {
     this.iterator = iterator;
@@ -22,7 +23,8 @@ public class DelegatingWalker<E> implements Walker<E> {
   }
 
   @Override
-  public @NotNull E next() {
+  @NotNull
+  public E next() {
     return iterator.next();
   }
 
@@ -37,7 +39,8 @@ public class DelegatingWalker<E> implements Walker<E> {
   }
 
   @Override
-  public @NotNull Optional<E> maybeNext() {
+  @NotNull
+  public Optional<E> maybeNext() {
     return Walker.super.maybeNext();
   }
 }

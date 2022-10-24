@@ -14,7 +14,8 @@ import org.jetbrains.annotations.Nullable;
  */
 public class SimpleBag<E> extends AbstractBag<E> {
 
-  private final @NotNull ArrayList<E> list;
+  @NotNull
+  private final ArrayList<E> list;
 
   public SimpleBag() {
     this.list = new ArrayList<>();
@@ -27,7 +28,8 @@ public class SimpleBag<E> extends AbstractBag<E> {
   }
 
   @Override
-  public @NotNull Walker<E> walker() {
+  @NotNull
+  public Walker<E> walker() {
     return new DelegatingWalker<>(list.iterator());
   }
 
@@ -51,7 +53,8 @@ public class SimpleBag<E> extends AbstractBag<E> {
   }
 
   @Override
-  public @NotNull Bag<E> shallowCopy() {
+  @NotNull
+  public Bag<E> shallowCopy() {
     return new SimpleBag<>(list);
   }
 }

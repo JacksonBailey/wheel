@@ -28,8 +28,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public sealed interface VBag<E> extends Walkable<E> permits VBagLeaf, VSuccession, VPile, Bag {
 
-  // TODO {@link foo(E)} seems like valid Javadoc, use it instead of foo(Object)
-
   /**
    * Returns the number of elements in this bag.
    *
@@ -81,7 +79,8 @@ public sealed interface VBag<E> extends Walkable<E> permits VBagLeaf, VSuccessio
    * @return the copy
    */
   @Contract("-> new")
-  @NotNull VBag<E> shallowCopy();
+  @NotNull
+  VBag<E> shallowCopy();
 
   /**
    * Returns an iterator over the elements of this bag. There's no guarantee about the order the
@@ -90,7 +89,8 @@ public sealed interface VBag<E> extends Walkable<E> permits VBagLeaf, VSuccessio
    * @return the iterator
    */
   @Override
-  default @NotNull Iterator<E> iterator() {
+  @NotNull
+  default Iterator<E> iterator() {
     return Walkable.super.iterator();
   }
 
@@ -100,46 +100,34 @@ public sealed interface VBag<E> extends Walkable<E> permits VBagLeaf, VSuccessio
    * @return the walker
    */
   @Override
-  @NotNull Walker<E> walker();
+  @NotNull
+  Walker<E> walker();
 
-  /**
-   * {@inheritDoc}
-   *
-   * @param action {@inheritDoc}
-   */
+  // TODO Docs
   @Override
   default void forEach(Consumer<? super E> action) {
     Walkable.super.forEach(action);
   }
 
-  /**
-   * {@inheritDoc} // TODO Docs
-   *
-   * @return {@inheritDoc}
-   */
+  // TODO Docs
   @Override
-  default @NotNull Spliterator<E> spliterator() {
+  @NotNull
+  default Spliterator<E> spliterator() {
     return Walkable.super.spliterator();
   }
 
 
-  /**
-   * {@inheritDoc} // TODO Docs
-   *
-   * @return {@inheritDoc}
-   */
+  // TODO Docs
   @Override
-  default @NotNull Stream<E> stream() {
+  @NotNull
+  default Stream<E> stream() {
     return Walkable.super.stream();
   }
 
-  /**
-   * {@inheritDoc} // TODO Docs
-   *
-   * @return {@inheritDoc}
-   */
+  // TODO Docs
   @Override
-  default @NotNull Stream<E> parallelStream() {
+  @NotNull
+  default Stream<E> parallelStream() {
     return Walkable.super.parallelStream();
   }
 

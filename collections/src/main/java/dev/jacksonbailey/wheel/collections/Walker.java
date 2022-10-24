@@ -6,7 +6,8 @@ import org.jetbrains.annotations.NotNull;
 
 public interface Walker<E> extends Iterator<E> {
 
-  default @NotNull Optional<E> maybeNext() {
+  @NotNull
+  default Optional<E> maybeNext() {
     if (hasNext()) {
       return Optional.of(next());
     }

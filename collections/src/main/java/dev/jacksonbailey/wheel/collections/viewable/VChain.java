@@ -3,6 +3,10 @@ package dev.jacksonbailey.wheel.collections.viewable;
 import dev.jacksonbailey.wheel.collections.Walker;
 import dev.jacksonbailey.wheel.collections.modifiable.Chain;
 import java.util.Iterator;
+import java.util.Optional;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,33 +18,75 @@ import org.jetbrains.annotations.Nullable;
  */
 public sealed interface VChain<E> extends VSuccession<E>, VPile<E> permits VChainLeaf, Chain {
 
-  /**
-   * {@inheritDoc}
-   *
-   * @return {@inheritDoc}
-   */
+  @Override
+  int size();
+
+  @Override
+  default boolean isEmpty() {
+    return VSuccession.super.isEmpty();
+  }
+
+  @Override
+  default boolean contains(@Nullable Object o) {
+    return VSuccession.super.contains(o);
+  }
+
+  @Override
+  default boolean containsAll(@NotNull VBag<?> b) {
+    return VSuccession.super.containsAll(b);
+  }
+
+  @Override
+  @NotNull Optional<E> getHead();
+
+  @Override
+  @NotNull Optional<E> getTail();
+
   @Override
   @Contract("-> new")
-  @NotNull VChain<E> shallowCopy();
+  @NotNull
+  VChain<E> shallowCopy();
 
-  /**
-   * Returns an iterator over the elements of this as a succession. The elements are ordered from
-   * head to tail.
-   *
-   * @return {@inheritDoc}
-   */
   @Override
-  default @NotNull Iterator<E> iterator() {
+  @NotNull
+  default Iterator<E> iterator() {
     return walker();
   }
 
-  /**
-   * See {@link #iterator()} for details on the order.
-   *
-   * @return {@inheritDoc}
-   */
   @Override
-  @NotNull Walker<E> walker();
+  @NotNull
+  Iterator<E> descendingIterator();
+
+  @Override
+  @NotNull
+  Walker<E> walker();
+
+  @Override
+  @NotNull
+  Walker<E> descendingWalker();
+
+  @Override
+  default void forEach(Consumer<? super E> action) {
+    VSuccession.super.forEach(action);
+  }
+
+  @Override
+  @NotNull
+  default Spliterator<E> spliterator() {
+    return VSuccession.super.spliterator();
+  }
+
+  @Override
+  @NotNull
+  default Stream<E> stream() {
+    return VSuccession.super.stream();
+  }
+
+  @Override
+  @NotNull
+  default Stream<E> parallelStream() {
+    return VSuccession.super.parallelStream();
+  }
 
   // TODO Update last bullet point when needed
   /**
@@ -60,11 +106,6 @@ public sealed interface VChain<E> extends VSuccession<E>, VPile<E> permits VChai
   @Contract("!null -> _; null -> false")
   boolean equals(@Nullable Object o);
 
-  /**
-   * {@inheritDoc}
-   *
-   * @return {@inheritDoc}
-   */
   @Override
   int hashCode();
 }
