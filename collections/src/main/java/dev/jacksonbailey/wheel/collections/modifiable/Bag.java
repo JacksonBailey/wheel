@@ -3,19 +3,43 @@ package dev.jacksonbailey.wheel.collections.modifiable;
 import static java.util.Objects.requireNonNull;
 
 import dev.jacksonbailey.wheel.collections.Bags;
+import dev.jacksonbailey.wheel.collections.Walker;
 import dev.jacksonbailey.wheel.collections.viewable.VBag;
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * In general these methods return true if the bag is modified.
+ *
+ * @param <E> the type of elements in the bag
  */
 public sealed interface Bag<E> extends VBag<E> permits BagLeaf, Succession, Pile {
 
+  int size();
+
+  @Override
+  default boolean isEmpty() {
+    return VBag.super.isEmpty();
+  }
+
+  @Override
+  default boolean contains(@Nullable Object o) {
+    return VBag.super.contains(o);
+  }
+
+  @Override
+  default boolean containsAll(@NotNull VBag<?> b) {
+    return VBag.super.containsAll(b);
+  }
+
   /**
-   * Adds the element {@code e} to somewhere in the bag. Until it is {@code remove}d then this bag
+   * Adds the element {@code e} to somewhere in this. Until it is {@code remove}d then this bag
    * {@code contains} it.
    * <p>
    * If this bag cannot hold {@code e} for whatever reason (subclasses may have restrictions) then
@@ -30,7 +54,7 @@ public sealed interface Bag<E> extends VBag<E> permits BagLeaf, Succession, Pile
    * Adds the elements of the bag {@code b} to somewhere in this bag.
    * <p>
    * There are no exact semantics other than each element in {@code b} will be passed to
-   * {@link #add(Object) add(E)} and if any of the calls return {@code true} then this will too.
+   * {@link #add(Object)} and if any of the calls return {@code true} then this will too.
    *
    * @param b the bag of elements to add
    * @return true if this was modified
@@ -40,27 +64,49 @@ public sealed interface Bag<E> extends VBag<E> permits BagLeaf, Succession, Pile
     return Bags.applyAcrossAll(requireNonNull(b), false, false, this::add);
   }
 
+  // TODO Consider returning Bags and Optionals of the removed elements?
+
   /**
-   * Removes one copy of the element {code o} from somewhere in the bag if one is present.
+   * Removes one copy of the element {@code o} from somewhere in the bag if one is present.
    *
    * @param o object to remove a copy of
    * @return true if this was modified
-   * @see #contains(Object)
    */
   @Contract("!null -> _; null -> false")
   boolean remove(@Nullable Object o);
 
-  // TODO XXX YOU ARE HERE
+  // TODO Add a removeAll that removes all from this? As opposed to one per thing?
+
+  /**
+   * Removes one copy of the element {@code o} for each element in the bag {@code b} according to
+   * {@link #remove(Object)} for each. Where {@code remove} is overridden it uses the logic of
+   * that instead.
+   *
+   * @param b bag containing the objects to remove
+   * @return true if this bag was modified
+   */
   default boolean removeAll(@NotNull VBag<?> b) {
     return Bags.applyAcrossAll(requireNonNull(b), false, false, this::remove);
   }
 
+  /**
+   * Removes each element in this that satisfies {@code filter}.
+   *
+   * @param filter to test each element with
+   * @return true if this bag was modified
+   */
   default boolean removeIf(@NotNull Predicate<? super E> filter) {
     requireNonNull(filter);
     var copy = shallowCopy();
     return Bags.applyAcrossAll(copy, false, false, e -> filter.test(e) && remove(e));
   }
 
+  /**
+   * Retains one copy of each element for each element in {@code b}. Removes everything else.
+   *
+   * @param b bag containing the objects to retain
+   * @return true if this bag was modified
+   */
   default boolean retainAll(@NotNull VBag<?> b) {
     requireNonNull(b);
     var copy = shallowCopy();
@@ -68,12 +114,58 @@ public sealed interface Bag<E> extends VBag<E> permits BagLeaf, Succession, Pile
         e -> removeIf(Predicate.not(b::contains)));
   }
 
-  default void clear() {
-    removeAll(shallowCopy());
+  /**
+   * Removes all elements from this.
+   *
+   * @return true if this bag was modified
+   */
+  default boolean clear() {
+    return Bags.applyAcrossAll(this, false, false, this::remove);
   }
+
+  // TODO See where inheritdoc can be used
 
   @Override
   @Contract("-> new")
-  @NotNull VBag<E> shallowCopy();
+  @NotNull
+  Bag<E> shallowCopy();
 
+  @Override
+  @NotNull
+  default Iterator<E> iterator() {
+    return walker();
+  }
+
+  @Override
+  @NotNull
+  Walker<E> walker();
+
+  @Override
+  default void forEach(Consumer<? super E> action) {
+    VBag.super.forEach(action);
+  }
+
+  @Override
+  @NotNull
+  default Spliterator<E> spliterator() {
+    return VBag.super.spliterator();
+  }
+
+  @Override
+  @NotNull
+  default Stream<E> stream() {
+    return VBag.super.stream();
+  }
+
+  @Override
+  @NotNull
+  default Stream<E> parallelStream() {
+    return VBag.super.parallelStream();
+  }
+
+  @Override
+  boolean equals(@Nullable Object o);
+
+  @Override
+  int hashCode();
 }

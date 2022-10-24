@@ -10,23 +10,28 @@ public interface Walkable<E> extends Iterable<E> {
 
   // TODO Specify that Walkable and Walker make shallow copies?
 
-  @NotNull Walker<E> walker();
+  @NotNull
+  Walker<E> walker();
 
-  // TODO Iterator or Walker here?
-  default @NotNull Iterator<E> iterator() {
+  // TODO Iterator or Walker here? If you do Walker then no need for walker() methods!
+  @NotNull
+  default Iterator<E> iterator() {
     return walker();
   }
 
   @Override
-  default @NotNull Spliterator<E> spliterator() {
+  @NotNull
+  default Spliterator<E> spliterator() {
     return Iterable.super.spliterator();
   }
 
-  default @NotNull Stream<E> stream() {
+  @NotNull
+  default Stream<E> stream() {
     return StreamSupport.stream(spliterator(), false);
   }
 
-  default @NotNull Stream<E> parallelStream() {
+  @NotNull
+  default Stream<E> parallelStream() {
     return StreamSupport.stream(spliterator(), true);
   }
 }
