@@ -4,12 +4,6 @@ import dev.jacksonbailey.wheel.collections.Bags;
 
 public abstract class AbstractVSuccession<E> extends AbstractVBag<E> implements VSuccessionLeaf<E> {
 
-  /**
-   * {@inheritDoc}
-   *
-   * @param o {@inheritDoc}
-   * @return {@inheritDoc}
-   */
   @Override
   public boolean equals(Object o) {
 
@@ -24,13 +18,6 @@ public abstract class AbstractVSuccession<E> extends AbstractVBag<E> implements 
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   *
-   * @implNote This currently has the same implementation as {@link AbstractVBag#hashCode()}.
-   *
-   * @return {@inheritDoc}
-   */
   @Override
   public int hashCode() {
     return Bags.hashingInOrder(walker());

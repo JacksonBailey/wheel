@@ -1,40 +1,35 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
 import dev.jacksonbailey.wheel.collections.Walker;
-import dev.jacksonbailey.wheel.collections.modifiable.Chain;
+import dev.jacksonbailey.wheel.collections.modifiable.Sequence;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-/**
- * Represents a viewable double-ended queue of elements.
- *
- * @param <E> the type of elements in the chain
- */
-public sealed interface VChain<E> extends VSuccession<E>, VPile<E> permits VChainLeaf, VSequence,
-    Chain {
+public sealed interface VSequence<E> extends VChain<E> permits VSequenceLeaf, Sequence {
+
+  // TODO Do I *actually* need all method stubs on all interfaces...?
 
   @Override
   int size();
 
   @Override
   default boolean isEmpty() {
-    return VSuccession.super.isEmpty();
+    return VChain.super.isEmpty();
   }
 
   @Override
   default boolean contains(@Nullable Object o) {
-    return VSuccession.super.contains(o);
+    return VChain.super.contains(o);
   }
 
   @Override
   default boolean containsAll(@NotNull VBag<?> b) {
-    return VSuccession.super.containsAll(b);
+    return VChain.super.containsAll(b);
   }
 
   @Override
@@ -44,14 +39,12 @@ public sealed interface VChain<E> extends VSuccession<E>, VPile<E> permits VChai
   @NotNull Optional<E> getTail();
 
   @Override
-  @Contract("-> new")
-  @NotNull
-  VChain<E> shallowCopy();
+  @NotNull VSequence<E> shallowCopy();
 
   @Override
   @NotNull
   default Iterator<E> iterator() {
-    return walker();
+    return VChain.super.iterator();
   }
 
   @Override
@@ -68,27 +61,30 @@ public sealed interface VChain<E> extends VSuccession<E>, VPile<E> permits VChai
 
   @Override
   default void forEach(Consumer<? super E> action) {
-    VSuccession.super.forEach(action);
+    VChain.super.forEach(action);
   }
 
   @Override
   @NotNull
   default Spliterator<E> spliterator() {
-    return VSuccession.super.spliterator();
+    return VChain.super.spliterator();
   }
 
   @Override
   @NotNull
   default Stream<E> stream() {
-    return VSuccession.super.stream();
+    return VChain.super.stream();
   }
 
   @Override
   @NotNull
   default Stream<E> parallelStream() {
-    return VSuccession.super.parallelStream();
+    return VChain.super.parallelStream();
   }
 
+  // TODO Add seq methods
+
+  // TODO Update last bullet when needed
   /**
    * Compares the specified object with this for equality.
    * <p>
@@ -96,16 +92,16 @@ public sealed interface VChain<E> extends VSuccession<E>, VPile<E> permits VChai
    * <ul>
    *   <li>{@code o} and this contain the same number of elements</li>
    *   <li>For each element in {@code o} there is a corresponding element in this in the same position</li>
-   *   <li>{@code o} is a {@code VChain} and NOT a {@code VSequence}</li>
+   *   <li>{@code o} is a {@code VSequence} and NOT a {@code ...}</li>
    * </ul>
    *
    * @param o {@inheritDoc}
    * @return {@inheritDoc}
    */
   @Override
-  @Contract("!null -> _; null -> false")
   boolean equals(@Nullable Object o);
 
   @Override
   int hashCode();
+
 }

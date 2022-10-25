@@ -2,72 +2,66 @@ package dev.jacksonbailey.wheel.collections.modifiable;
 
 import dev.jacksonbailey.wheel.collections.Walker;
 import dev.jacksonbailey.wheel.collections.viewable.VBag;
-import dev.jacksonbailey.wheel.collections.viewable.VChain;
+import dev.jacksonbailey.wheel.collections.viewable.VSequence;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public sealed interface Chain<E> extends VChain<E>, Succession<E>, Pile<E>
-    permits ChainLeaf, Sequence {
+public sealed interface Sequence<E> extends VSequence<E>, Chain<E> permits SequenceLeaf {
 
   @Override
   int size();
 
   @Override
   default boolean isEmpty() {
-    return VChain.super.isEmpty();
+    return VSequence.super.isEmpty();
   }
 
   @Override
   default boolean contains(@Nullable Object o) {
-    return VChain.super.contains(o);
+    return VSequence.super.contains(o);
   }
 
   @Override
   default boolean containsAll(@NotNull VBag<?> b) {
-    return VChain.super.containsAll(b);
+    return VSequence.super.containsAll(b);
   }
 
   @Override
-  @NotNull Optional<E> getHead();
+  @NotNull
+  Optional<E> getHead();
 
   @Override
-  @NotNull Optional<E> getTail();
+  @NotNull
+  Optional<E> getTail();
 
   @Override
   default boolean add(@NotNull E e) {
-    return addTail(e);
+    return Chain.super.add(e);
   }
 
   @Override
   default boolean addAll(@NotNull VBag<? extends E> b) {
-    return Succession.super.addAll(b);
+    return Chain.super.addAll(b);
   }
 
-  /**
-   * Adds the element {@code e} to the head of this.
-   *
-   * @param e the element to add
-   * @return true if this was modified
-   */
+  @Override
   boolean addHead(@NotNull E e);
 
   @Override
   boolean addTail(@NotNull E e);
 
   @Override
-  @Contract("!null -> _; null -> false")
   boolean remove(@Nullable Object o);
 
   @Override
   default boolean removeAll(@NotNull VBag<?> b) {
-    return Succession.super.removeAll(b);
+    return Chain.super.removeAll(b);
   }
 
   @Override
@@ -79,46 +73,43 @@ public sealed interface Chain<E> extends VChain<E>, Succession<E>, Pile<E>
   @Override
   @NotNull
   default Optional<E> removeHead() {
-    return Succession.super.removeHead();
+    return Chain.super.removeHead();
   }
 
   @Override
   @NotNull
   default Optional<E> removeTail() {
-    return Pile.super.removeTail();
+    return Chain.super.removeTail();
   }
 
   @Override
   default boolean removeIf(@NotNull Predicate<? super E> filter) {
-    return Succession.super.removeIf(filter);
+    return Chain.super.removeIf(filter);
   }
 
   @Override
   default boolean retainAll(@NotNull VBag<?> b) {
-    return Succession.super.retainAll(b);
+    return Chain.super.retainAll(b);
   }
 
   @Override
   default boolean clear() {
-    return Succession.super.clear();
+    return Chain.super.clear();
   }
 
   @Override
-  @Contract("-> new")
   @NotNull
-  Chain<E> shallowCopy();
+  Sequence<E> shallowCopy();
 
   @Override
   @NotNull
   default Iterator<E> iterator() {
-    return walker();
+    return VSequence.super.iterator();
   }
 
   @Override
   @NotNull
-  default Iterator<E> descendingIterator() {
-    return descendingWalker();
-  }
+  Iterator<E> descendingIterator();
 
   @Override
   @NotNull
@@ -130,29 +121,30 @@ public sealed interface Chain<E> extends VChain<E>, Succession<E>, Pile<E>
 
   @Override
   default void forEach(Consumer<? super E> action) {
-    VChain.super.forEach(action);
+    VSequence.super.forEach(action);
   }
 
   @Override
   @NotNull
   default Spliterator<E> spliterator() {
-    return VChain.super.spliterator();
+    return VSequence.super.spliterator();
   }
+
+  // TODO Make sure all methods that can be marked default due to a super actually are
 
   @Override
   @NotNull
   default Stream<E> stream() {
-    return VChain.super.stream();
+    return VSequence.super.stream();
   }
 
   @Override
   @NotNull
   default Stream<E> parallelStream() {
-    return VChain.super.parallelStream();
+    return VSequence.super.parallelStream();
   }
 
   @Override
-  @Contract("!null -> _; null -> false")
   boolean equals(@Nullable Object o);
 
   @Override
