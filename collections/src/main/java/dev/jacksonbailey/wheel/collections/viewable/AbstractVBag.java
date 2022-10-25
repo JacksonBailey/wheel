@@ -11,12 +11,6 @@ import dev.jacksonbailey.wheel.collections.Bags;
  */
 public abstract class AbstractVBag<E> implements VBagLeaf<E> {
 
-  /**
-   * {@inheritDoc}
-   *
-   * @param o {@inheritDoc}
-   * @return {@inheritDoc}
-   */
   @Override
   public boolean equals(Object o) {
 
@@ -36,11 +30,6 @@ public abstract class AbstractVBag<E> implements VBagLeaf<E> {
     return false;
   }
 
-  /**
-   * {@inheritDoc}
-   *
-   * @return {@inheritDoc}
-   */
   @Override
   public int hashCode() {
     return Bags.hashingInOrder(walker());
