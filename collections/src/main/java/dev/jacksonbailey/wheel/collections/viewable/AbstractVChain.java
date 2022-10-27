@@ -3,7 +3,7 @@ package dev.jacksonbailey.wheel.collections.viewable;
 import dev.jacksonbailey.wheel.collections.Bags;
 
 public abstract class AbstractVChain<E> extends AbstractVSuccession<E>
-    implements VChainLeaf<E> {
+    implements VChain<E> {
 
   @Override
   public boolean equals(Object o) {

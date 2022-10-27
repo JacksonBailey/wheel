@@ -2,7 +2,8 @@ package dev.jacksonbailey.wheel.collections.viewable;
 
 import dev.jacksonbailey.wheel.collections.Bags;
 
-public abstract class AbstractVSuccession<E> extends AbstractVBag<E> implements VSuccessionLeaf<E> {
+public abstract class AbstractVSuccession<E> extends AbstractVBag<E> implements
+    VSuccession<E> {
 
   @Override
   public boolean equals(Object o) {

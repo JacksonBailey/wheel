@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @param <E> the type of elements in the bag
  */
-public sealed interface Bag<E> extends VBag<E> permits BagLeaf, Succession, Pile {
+public interface Bag<E> extends VBag<E> {
 
   int size();
 

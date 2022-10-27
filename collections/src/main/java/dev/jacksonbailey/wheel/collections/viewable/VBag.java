@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import dev.jacksonbailey.wheel.collections.Bags;
 import dev.jacksonbailey.wheel.collections.Walkable;
 import dev.jacksonbailey.wheel.collections.Walker;
-import dev.jacksonbailey.wheel.collections.modifiable.Bag;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Spliterator;
@@ -26,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @param <E> the type of elements in the bag
  */
-public sealed interface VBag<E> extends Walkable<E> permits VBagLeaf, VSuccession, VPile, Bag {
+public interface VBag<E> extends Walkable<E> {
 
   /**
    * Returns the number of elements in this bag.

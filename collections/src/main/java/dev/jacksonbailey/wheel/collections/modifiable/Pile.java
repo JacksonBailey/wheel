@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Last in, first out. Adds at tail/last and removes from head/first.
  */
-public sealed interface Pile<E> extends VPile<E>, Bag<E> permits PileLeaf, Chain {
+public interface Pile<E> extends VPile<E>, Bag<E> {
 
   @Override
   int size();

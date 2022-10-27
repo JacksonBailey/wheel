@@ -1,7 +1,6 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
 import dev.jacksonbailey.wheel.collections.Walker;
-import dev.jacksonbailey.wheel.collections.modifiable.Chain;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Spliterator;
@@ -16,8 +15,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @param <E> the type of elements in the chain
  */
-public sealed interface VChain<E> extends VSuccession<E>, VPile<E> permits VChainLeaf, VSequence,
-    Chain {
+public interface VChain<E> extends VSuccession<E>, VPile<E> {
 
   @Override
   int size();

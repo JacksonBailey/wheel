@@ -1,7 +1,6 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
 import dev.jacksonbailey.wheel.collections.Walker;
-import dev.jacksonbailey.wheel.collections.modifiable.Succession;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Spliterator;
@@ -16,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @param <E> the type of elements in the succession
  */
-public sealed interface VSuccession<E> extends VBag<E> permits VSuccessionLeaf, VChain, Succession {
+public interface VSuccession<E> extends VBag<E> {
 
   @Override
   int size();

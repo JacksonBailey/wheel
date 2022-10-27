@@ -13,8 +13,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public sealed interface Chain<E> extends VChain<E>, Succession<E>, Pile<E>
-    permits ChainLeaf, Sequence {
+public interface Chain<E> extends VChain<E>, Succession<E>, Pile<E> {
 
   @Override
   int size();

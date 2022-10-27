@@ -2,7 +2,7 @@ package dev.jacksonbailey.wheel.collections.viewable;
 
 import dev.jacksonbailey.wheel.collections.Bags;
 
-public abstract class AbstractVPile<E> extends AbstractVBag<E> implements VPileLeaf<E> {
+public abstract class AbstractVPile<E> extends AbstractVBag<E> implements VPile<E> {
 
   @Override
   public boolean equals(Object o) {

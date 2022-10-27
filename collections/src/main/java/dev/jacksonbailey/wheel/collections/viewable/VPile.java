@@ -1,7 +1,6 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
 import dev.jacksonbailey.wheel.collections.Walker;
-import dev.jacksonbailey.wheel.collections.modifiable.Pile;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Spliterator;
@@ -16,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @param <E> the type of elements in the pile
  */
-public sealed interface VPile<E> extends VBag<E> permits VPileLeaf, VChain, Pile {
+public interface VPile<E> extends VBag<E> {
 
   @Override
   int size();

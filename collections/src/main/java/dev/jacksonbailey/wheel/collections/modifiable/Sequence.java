@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public sealed interface Sequence<E> extends VSequence<E>, Chain<E> permits SequenceLeaf {
+public interface Sequence<E> extends VSequence<E>, Chain<E> {
 
   @Override
   int size();

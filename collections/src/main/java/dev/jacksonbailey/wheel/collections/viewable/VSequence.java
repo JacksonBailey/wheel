@@ -1,7 +1,6 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
 import dev.jacksonbailey.wheel.collections.Walker;
-import dev.jacksonbailey.wheel.collections.modifiable.Sequence;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.Spliterator;
@@ -10,7 +9,7 @@ import java.util.stream.Stream;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public sealed interface VSequence<E> extends VChain<E> permits VSequenceLeaf, Sequence {
+public interface VSequence<E> extends VChain<E> {
 
   // TODO Do I *actually* need all method stubs on all interfaces...?
 
