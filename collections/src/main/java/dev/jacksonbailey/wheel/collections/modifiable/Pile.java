@@ -1,14 +1,8 @@
 package dev.jacksonbailey.wheel.collections.modifiable;
 
-import dev.jacksonbailey.wheel.collections.Walker;
 import dev.jacksonbailey.wheel.collections.viewable.VBag;
 import dev.jacksonbailey.wheel.collections.viewable.VPile;
-import java.util.Iterator;
 import java.util.Optional;
-import java.util.Spliterator;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -17,28 +11,6 @@ import org.jetbrains.annotations.Nullable;
  * Last in, first out. Adds at tail/last and removes from head/first.
  */
 public interface Pile<E> extends VPile<E>, Bag<E> {
-
-  @Override
-  int size();
-
-  @Override
-  default boolean isEmpty() {
-    return VPile.super.isEmpty();
-  }
-
-  @Override
-  default boolean contains(@Nullable Object o) {
-    return VPile.super.contains(o);
-  }
-
-  @Override
-  default boolean containsAll(@NotNull VBag<?> b) {
-    return VPile.super.containsAll(b);
-  }
-
-  @Override
-  @NotNull
-  Optional<E> getTail();
 
   /**
    * Adds the element {@code e} to the tail of this.
@@ -51,6 +23,7 @@ public interface Pile<E> extends VPile<E>, Bag<E> {
     return addTail(e);
   }
 
+  // TODO Should addAll be defined in terms of add? If so remove
   @Override
   default boolean addAll(@NotNull VBag<? extends E> b) {
     return Bag.super.addAll(b);
@@ -76,6 +49,7 @@ public interface Pile<E> extends VPile<E>, Bag<E> {
   @Contract("!null -> _; null -> false")
   boolean remove(@Nullable Object o);
 
+  // TODO Should removeAll be defined in terms of remove? If so remove this
   @Override
   default boolean removeAll(@NotNull VBag<?> b) {
     return Bag.super.removeAll(b);
@@ -105,69 +79,14 @@ public interface Pile<E> extends VPile<E>, Bag<E> {
   }
 
   @Override
-  default boolean removeIf(@NotNull Predicate<? super E> filter) {
-    return Bag.super.removeIf(filter);
-  }
-
-  @Override
   default boolean retainAll(@NotNull VBag<?> b) {
     return Bag.super.retainAll(b);
   }
 
-  @Override
-  default boolean clear() {
-    return Bag.super.clear();
-  }
 
   @Override
   @Contract("-> new")
   @NotNull
   Pile<E> shallowCopy();
-
-  @Override
-  @NotNull
-  Iterator<E> iterator();
-
-  @NotNull
-  default Iterator<E> descendingIterator() {
-    return descendingWalker();
-  }
-
-  @Override
-  @NotNull
-  Walker<E> walker();
-
-  @NotNull
-  Walker<E> descendingWalker();
-
-  @Override
-  default void forEach(Consumer<? super E> action) {
-    VPile.super.forEach(action);
-  }
-
-  @Override
-  @NotNull
-  default Spliterator<E> spliterator() {
-    return VPile.super.spliterator();
-  }
-
-  @Override
-  @NotNull
-  default Stream<E> stream() {
-    return VPile.super.stream();
-  }
-
-  @Override
-  @NotNull
-  default Stream<E> parallelStream() {
-    return VPile.super.parallelStream();
-  }
-
-  @Override
-  @Contract("!null -> _; null -> false")
-  boolean equals(@Nullable Object o);
-
-  @Override
-  int hashCode();
 
 }

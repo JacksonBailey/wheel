@@ -1,11 +1,6 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
-import dev.jacksonbailey.wheel.collections.Walker;
 import java.util.Iterator;
-import java.util.Optional;
-import java.util.Spliterator;
-import java.util.function.Consumer;
-import java.util.stream.Stream;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -18,30 +13,6 @@ import org.jetbrains.annotations.Nullable;
 public interface VChain<E> extends VSuccession<E>, VPile<E> {
 
   @Override
-  int size();
-
-  @Override
-  default boolean isEmpty() {
-    return VSuccession.super.isEmpty();
-  }
-
-  @Override
-  default boolean contains(@Nullable Object o) {
-    return VSuccession.super.contains(o);
-  }
-
-  @Override
-  default boolean containsAll(@NotNull VBag<?> b) {
-    return VSuccession.super.containsAll(b);
-  }
-
-  @Override
-  @NotNull Optional<E> getHead();
-
-  @Override
-  @NotNull Optional<E> getTail();
-
-  @Override
   @Contract("-> new")
   @NotNull
   VChain<E> shallowCopy();
@@ -49,43 +20,9 @@ public interface VChain<E> extends VSuccession<E>, VPile<E> {
   @Override
   @NotNull
   default Iterator<E> iterator() {
-    return walker();
+    return VSuccession.super.iterator();
   }
-
-  @Override
-  @NotNull
-  Iterator<E> descendingIterator();
-
-  @Override
-  @NotNull
-  Walker<E> walker();
-
-  @Override
-  @NotNull
-  Walker<E> descendingWalker();
-
-  @Override
-  default void forEach(Consumer<? super E> action) {
-    VSuccession.super.forEach(action);
-  }
-
-  @Override
-  @NotNull
-  default Spliterator<E> spliterator() {
-    return VSuccession.super.spliterator();
-  }
-
-  @Override
-  @NotNull
-  default Stream<E> stream() {
-    return VSuccession.super.stream();
-  }
-
-  @Override
-  @NotNull
-  default Stream<E> parallelStream() {
-    return VSuccession.super.parallelStream();
-  }
+  // TODO Double check this gets Succession iterator and walker
 
   /**
    * Compares the specified object with this for equality.

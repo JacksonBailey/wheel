@@ -3,13 +3,8 @@ package dev.jacksonbailey.wheel.collections.modifiable;
 import static java.util.Objects.requireNonNull;
 
 import dev.jacksonbailey.wheel.collections.Bags;
-import dev.jacksonbailey.wheel.collections.Walker;
 import dev.jacksonbailey.wheel.collections.viewable.VBag;
-import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,23 +15,6 @@ import org.jetbrains.annotations.Nullable;
  * @param <E> the type of elements in the bag
  */
 public interface Bag<E> extends VBag<E> {
-
-  int size();
-
-  @Override
-  default boolean isEmpty() {
-    return VBag.super.isEmpty();
-  }
-
-  @Override
-  default boolean contains(@Nullable Object o) {
-    return VBag.super.contains(o);
-  }
-
-  @Override
-  default boolean containsAll(@NotNull VBag<?> b) {
-    return VBag.super.containsAll(b);
-  }
 
   /**
    * Adds the element {@code e} to somewhere in this. Until it is {@code remove}d then this bag
@@ -130,42 +108,4 @@ public interface Bag<E> extends VBag<E> {
   @NotNull
   Bag<E> shallowCopy();
 
-  @Override
-  @NotNull
-  default Iterator<E> iterator() {
-    return walker();
-  }
-
-  @Override
-  @NotNull
-  Walker<E> walker();
-
-  @Override
-  default void forEach(Consumer<? super E> action) {
-    VBag.super.forEach(action);
-  }
-
-  @Override
-  @NotNull
-  default Spliterator<E> spliterator() {
-    return VBag.super.spliterator();
-  }
-
-  @Override
-  @NotNull
-  default Stream<E> stream() {
-    return VBag.super.stream();
-  }
-
-  @Override
-  @NotNull
-  default Stream<E> parallelStream() {
-    return VBag.super.parallelStream();
-  }
-
-  @Override
-  boolean equals(@Nullable Object o);
-
-  @Override
-  int hashCode();
 }

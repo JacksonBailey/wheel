@@ -3,9 +3,6 @@ package dev.jacksonbailey.wheel.collections.viewable;
 import dev.jacksonbailey.wheel.collections.Walker;
 import java.util.Iterator;
 import java.util.Optional;
-import java.util.Spliterator;
-import java.util.function.Consumer;
-import java.util.stream.Stream;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,24 +13,6 @@ import org.jetbrains.annotations.Nullable;
  * @param <E> the type of elements in the pile
  */
 public interface VPile<E> extends VBag<E> {
-
-  @Override
-  int size();
-
-  @Override
-  default boolean isEmpty() {
-    return VBag.super.isEmpty();
-  }
-
-  @Override
-  default boolean contains(@Nullable Object o) {
-    return VBag.super.contains(o);
-  }
-
-  @Override
-  default boolean containsAll(@NotNull VBag<?> b) {
-    return VBag.super.containsAll(b);
-  }
 
   /**
    * Returns an {@code Optional} of the tail element in the pile. {@code Optional.empty()} if this
@@ -59,7 +38,9 @@ public interface VPile<E> extends VBag<E> {
    */
   @Override
   @NotNull
-  Iterator<E> iterator();
+  default Iterator<E> iterator() {
+    return VBag.super.iterator();
+  }
 
   /**
    * Returns an iterator over the elements of this pile. The elements are ordered from tail to head.
@@ -90,29 +71,6 @@ public interface VPile<E> extends VBag<E> {
    */
   @NotNull
   Walker<E> descendingWalker();
-
-  @Override
-  default void forEach(Consumer<? super E> action) {
-    VBag.super.forEach(action);
-  }
-
-  @Override
-  @NotNull
-  default Spliterator<E> spliterator() {
-    return VBag.super.spliterator();
-  }
-
-  @Override
-  @NotNull
-  default Stream<E> stream() {
-    return VBag.super.stream();
-  }
-
-  @Override
-  @NotNull
-  default Stream<E> parallelStream() {
-    return VBag.super.parallelStream();
-  }
 
   /**
    * Compares the specified object with this for equality.
