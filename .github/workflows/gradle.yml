@@ -1,4 +1,4 @@
-name: "Verify that the project builds"
+name: "Verify"
 on: [push, pull_request]
 
 jobs:
