@@ -25,7 +25,7 @@ public abstract class AbstractVBag<E> implements VBag<E> {
 
   @Override
   public int hashCode() {
-    return Bags.hashingInOrder(walker());
+    return Bags.sumHashing(this);
   }
 
 }

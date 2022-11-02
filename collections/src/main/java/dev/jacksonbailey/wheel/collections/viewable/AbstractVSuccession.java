@@ -21,7 +21,7 @@ public abstract class AbstractVSuccession<E> extends AbstractVBag<E> implements
 
   @Override
   public int hashCode() {
-    return Bags.hashingInOrder(walker());
+    return Bags.productHashingInOrder(walker());
   }
 
 }

@@ -21,7 +21,7 @@ public abstract class AbstractVPile<E> extends AbstractVBag<E> implements VPile<
   // TODO Does this cause collisions on Successions with the same elements and do we care?
   @Override
   public int hashCode() {
-    return Bags.hashingInOrder(descendingWalker());
+    return Bags.productHashingInOrder(descendingWalker());
   }
 
 }

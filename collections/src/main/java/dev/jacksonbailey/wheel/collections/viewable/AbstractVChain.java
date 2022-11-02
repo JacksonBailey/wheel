@@ -21,7 +21,7 @@ public abstract class AbstractVChain<E> extends AbstractVSuccession<E>
 
   @Override
   public int hashCode() {
-    return Bags.hashingInOrder(walker());
+    return Bags.productHashingInOrder(walker());
   }
 
 }

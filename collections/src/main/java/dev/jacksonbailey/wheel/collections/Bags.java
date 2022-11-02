@@ -58,12 +58,18 @@ public final class Bags {
     return true;
   }
 
-  public static int hashingInOrder(@NotNull Walker<?> walker) {
+  public static int productHashingInOrder(@NotNull Walker<?> walker) {
     int hash = 1;
     while (walker.hasNext()) {
       hash = 31 * hash + Objects.hashCode(walker.next());
     }
     return hash;
+  }
+
+  public static int sumHashing(VBag<?> bag) {
+    return bag.stream()
+              .mapToInt(Objects::hashCode)
+              .sum();
   }
 
 
