@@ -58,17 +58,34 @@ public final class Bags {
     return true;
   }
 
+  /*
+   * TODO I keep getting this nagging feeling that having VBag specify equals is problematic because
+   * it violates behavioral subtyping. I don't think there's a way to correctly have reflexivity
+   * and subtyping. Effective Java says as much but I thought that was only for "record" style
+   * classes.
+   */
+
+  /**
+   * @apiNote This takes a {@code Walker} as opposed to a {@code VBag} so that the caller can
+   * specify the order to hash in. As an example, {@code VSuccession} will want to be hashed in a
+   * different order than {@code VPile}.
+   *
+   * @implNote {@link java.util.stream.IntStream#reduce IntStream.reduce} is not specified to be
+   * sequential, although it appears the implementation is. It's best to not rely on unspecified
+   * behaviors. This will just use a non-stream approach rather than doing something funky with an
+   * {@link java.util.concurrent.atomic.AtomicInteger AtomicInteger}.
+   */
   public static int productHashingInOrder(@NotNull Walker<?> walker) {
     int hash = 1;
     while (walker.hasNext()) {
-      hash = 31 * hash + Objects.hashCode(walker.next());
+      hash = 31 * hash + walker.next().hashCode();
     }
     return hash;
   }
 
   public static int sumHashing(VBag<?> bag) {
     return bag.stream()
-              .mapToInt(Objects::hashCode)
+              .mapToInt(Object::hashCode)
               .sum();
   }
 

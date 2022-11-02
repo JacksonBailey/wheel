@@ -1,7 +1,9 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -63,6 +65,13 @@ public class SimpleVBagTest {
         () -> VBagSpec.equalsAndHashCode(bag, new SimpleVBag<>(Collections.emptyList()), false),
         () -> VBagSpec.equalsAndHashCode(bag, new SimpleVBag<>(List.of(3, 2, 1)), true)
     );
+  }
+
+  @Test
+  void noNullsAllowed() {
+    var list = new ArrayList<>();
+    list.add(null);
+    assertThrows(NullPointerException.class, () -> new SimpleVBag<>(list));
   }
 
 }
