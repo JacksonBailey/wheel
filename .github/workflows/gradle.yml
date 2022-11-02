@@ -6,14 +6,14 @@ jobs:
     name: "Build"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Gradle Wrapper Validation
         uses: gradle/wrapper-validation-action@v1
       - name: Setup Java JDK
         uses: actions/setup-java@v3.6.0
         with:
           distribution: temurin
-          java-version: 18 # Until Gradle supports Java 19
+          java-version: 19
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2.3.3
       - name: Execute Gradle build
