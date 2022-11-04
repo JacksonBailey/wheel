@@ -3,6 +3,10 @@ package dev.jacksonbailey.wheel.collections;
 import static org.mockito.AdditionalAnswers.delegatesTo;
 import static org.mockito.Mockito.mock;
 
+import java.util.Iterator;
+import java.util.Spliterators;
+import java.util.stream.StreamSupport;
+
 public final class TestUtils {
 
   private TestUtils() {
@@ -19,6 +23,11 @@ public final class TestUtils {
   @SuppressWarnings("unchecked")
   public static <R, P extends R> P spyLambda(final Class<R> lambdaType, final P lambda) {
     return (P) mock(lambdaType, delegatesTo(lambda));
+  }
+
+  public static <E> Iterable<E> toIterable(Iterator<E> iterator) {
+    return StreamSupport.stream(Spliterators.spliteratorUnknownSize(iterator, 0), false)
+                        .toList();
   }
 
 }

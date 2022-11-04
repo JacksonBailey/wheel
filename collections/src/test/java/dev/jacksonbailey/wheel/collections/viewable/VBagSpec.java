@@ -1,5 +1,6 @@
 package dev.jacksonbailey.wheel.collections.viewable;
 
+import static dev.jacksonbailey.wheel.collections.TestUtils.toIterable;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 class VBagSpec {
 
-  static void invariants(VBag<?> bag) {
+  static <E> void invariants(VBag<E> bag) {
     assertAll(
         () -> assertThat(bag.size()).isGreaterThanOrEqualTo(0),
         () -> {
@@ -36,7 +37,7 @@ class VBagSpec {
     );
   }
 
-  static void contains(VBag<?> bag, @Nullable Object o, boolean expected) {
+  static <E> void contains(VBag<E> bag, @Nullable Object o, boolean expected) {
     assumeFalse(o == null && expected, "Bags cannot contain null");
 
     assertAll(
@@ -56,7 +57,7 @@ class VBagSpec {
 
   }
 
-  static void containsAll(VBag<?> bag, VBag<?> b, boolean expected) {
+  static <E> void containsAll(VBag<E> bag, VBag<?> b, boolean expected) {
     assertAll(
         () -> assertEquals(expected, bag.containsAll(b)),
         () -> {
@@ -69,47 +70,87 @@ class VBagSpec {
     );
   }
 
-  static void shallowCopy(VBag<?> bag) {
+  static <E> void shallowCopy(VBag<E> bag) {
     var copy = bag.shallowCopy();
     assertAll(
+        () -> assertThat(copy).containsExactlyInAnyOrderElementsOf(bag),
         () -> assertEquals(bag, copy),
         () -> assertEquals(bag.hashCode(), copy.hashCode())
     );
   }
 
-  static void iterator(VBag<?> bag) {
-    // TODO
-  }
-
-  static void walker(VBag<?> bag) {
-    // TODO
-  }
-
-  static void forEach(VBag<?> bag) {
-    // TODO
-  }
-
-  static void spliterator(VBag<?> bag) {
-    // TODO
-  }
-
-  static void stream(VBag<?> bag) {
-    // TODO
-  }
-
-  static void parallelStream(VBag<?> bag) {
-    // TODO
-  }
-
-  static void equalsAndHashCode(@Nullable VBag<?> bag1, @Nullable VBag<?> bag2, boolean expected) {
+  static <E> void iterator(VBag<E> bag) {
     assertAll(
+        () -> assumingThat(!bag.isEmpty(), () -> assertThat(bag.iterator()).hasNext()),
         () -> {
-          assertEquals(expected, Objects.equals(bag1, bag2));
-          assumingThat(expected, () -> assertEquals(Objects.hashCode(bag1), Objects.hashCode(bag2)));
+          var it = bag.iterator();
+          for (int i = 0; i < bag.size(); i++) {
+            assertThat(it.next()).isNotNull(); // No nulls allowed
+          }
+          assertThat(it).isExhausted();
+        },
+        () -> assertThat(bag.iterator()).toIterable().size().isEqualTo(bag.size()),
+        () -> assertThat(bag.iterator()).toIterable().allMatch(bag::contains),
+        () -> assertThat(bag.iterator()).toIterable()
+                                        .containsExactlyInAnyOrderElementsOf(
+                                            toIterable(bag.iterator())
+                                        )
+    );
+  }
+
+  static <E> void walker(VBag<E> bag) {
+    assertAll(
+        () -> assumingThat(!bag.isEmpty(), () -> assertThat(bag.walker()).hasNext()),
+        () -> assumingThat(!bag.isEmpty(), () -> assertThat(bag.walker().maybeNext()).isPresent()),
+        () -> {
+          var walker = bag.walker();
+          for (int i = 0; i < bag.size(); i++) {
+            assertThat(walker.next()).isNotNull(); // No nulls allowed
+          }
+          assertThat(walker).isExhausted();
         },
         () -> {
-          assertEquals(expected, Objects.equals(bag2, bag1));
-          assumingThat(expected, () -> assertEquals(Objects.hashCode(bag2), Objects.hashCode(bag1)));
+          var walker = bag.walker();
+          var next = walker.maybeNext();
+          while (next.isPresent()) {
+            next = walker.maybeNext();
+          }
+          assertThat(walker).isExhausted();
+        },
+        () -> assertThat(bag.walker()).toIterable().size().isEqualTo(bag.size()),
+        () -> assertThat(bag.walker()).toIterable().allMatch(bag::contains),
+        () -> assertThat(bag.walker()).toIterable()
+                                      .containsExactlyInAnyOrderElementsOf(
+                                          toIterable(bag.walker())
+                                      )
+    );
+  }
+
+  static <E> void forEach(VBag<E> bag) {
+    // TODO
+  }
+
+  static <E> void spliterator(VBag<E> bag) {
+    // TODO
+  }
+
+  static <E> void stream(VBag<E> bag) {
+    // TODO
+  }
+
+  static <E> void parallelStream(VBag<E> bag) {
+    // TODO
+  }
+
+  static <E> void equalsAndHashCode(@Nullable VBag<E> bag, @Nullable VBag<?> b, boolean expected) {
+    assertAll(
+        () -> {
+          assertEquals(expected, Objects.equals(bag, b));
+          assumingThat(expected, () -> assertEquals(Objects.hashCode(bag), Objects.hashCode(b)));
+        },
+        () -> {
+          assertEquals(expected, Objects.equals(b, bag));
+          assumingThat(expected, () -> assertEquals(Objects.hashCode(b), Objects.hashCode(bag)));
         }
     );
   }
