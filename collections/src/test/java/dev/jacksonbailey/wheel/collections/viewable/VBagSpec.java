@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 import org.jetbrains.annotations.Nullable;
@@ -127,19 +128,26 @@ class VBagSpec {
   }
 
   static <E> void forEach(VBag<E> bag) {
-    // TODO
+    var list = new ArrayList<E>();
+    bag.forEach(list::add);
+    assertThat(list).containsExactlyInAnyOrderElementsOf(bag);
   }
 
   static <E> void spliterator(VBag<E> bag) {
-    // TODO
+    var spliterator = bag.spliterator();
+    var list = new ArrayList<E>();
+    while (spliterator.tryAdvance(list::add)) {
+      assertThat(bag).containsAll(list);
+    }
+    assertThat(list).containsExactlyInAnyOrderElementsOf(bag);
   }
 
   static <E> void stream(VBag<E> bag) {
-    // TODO
+    assertThat(bag.stream().toList()).containsExactlyInAnyOrderElementsOf(bag);
   }
 
   static <E> void parallelStream(VBag<E> bag) {
-    // TODO
+    assertThat(bag.parallelStream().toList()).containsExactlyInAnyOrderElementsOf(bag);
   }
 
   static <E> void equalsAndHashCode(@Nullable VBag<E> bag, @Nullable VBag<?> b, boolean expected) {
