@@ -15,6 +15,13 @@ tasks {
     named<Test>("test") {
         useJUnitPlatform()
     }
+
+    withType<Jar> {
+        metaInf {
+            from(layout.projectDirectory.file("LICENSE"))
+        }
+    }
+
     assemble {
         dependsOn(tasks.withType<GenerateMavenPom>(), tasks.withType<GenerateModuleMetadata>())
     }

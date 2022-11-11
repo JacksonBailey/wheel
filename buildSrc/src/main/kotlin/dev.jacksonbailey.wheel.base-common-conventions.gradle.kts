@@ -1,3 +1,5 @@
+import java.net.URI
+
 plugins {
     idea
     `maven-publish`
@@ -24,6 +26,13 @@ tasks {
     }
 }
 
+val licenseName: String by project
+val licenseUrl: String by project
+
+fun validUri(string: String): String {
+    return URI.create(string).toString()
+}
+
 publishing {
     publications {
         withType<MavenPublication>() {
@@ -34,20 +43,20 @@ publishing {
                 url.set(gitHubUrl)
                 licenses {
                     license {
-                        name.set("LGPL-3.0-or-later")
-                        url.set("https://www.gnu.org/licenses/lgpl-3.0.txt")
+                        name.set(licenseName)
+                        url.set(validUri(licenseUrl))
                     }
                 }
                 developers {
                     developer {
                         name.set("Jackson Bailey")
-                        url.set("https://jacksonbailey.dev")
+                        url.set(validUri("https://jacksonbailey.dev"))
                     }
                 }
                 scm {
                     connection.set("scm:git:${gitHubUrl}.git")
                     developerConnection.set("scm:git:${gitHubUrl}.git")
-                    url.set(gitHubUrl)
+                    url.set(validUri(gitHubUrl))
                 }
             }
         }
