@@ -12,10 +12,6 @@ idea {
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 extra["isReleaseVersion"] = !version.toString().endsWith("SNAPSHOT")
 
 tasks {
