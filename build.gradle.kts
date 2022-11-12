@@ -10,5 +10,6 @@ allprojects {
 }
 
 tasks.withType(DependencyUpdatesTask::class) {
+    // TODO Consider adding dependencyUpdates to build?
     revision = "release"
 }
