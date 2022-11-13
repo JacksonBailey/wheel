@@ -1,5 +1,11 @@
 rootProject.name = "wheel"
-include("platform", "collections", "vexillum")
+include(
+    "platform",
+    "collections",
+    "vexillum:vexillum-api",
+    "vexillum:vexillum-client",
+    "vexillum:vexillum-server"
+)
 
 dependencyResolutionManagement {
     // https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:centralized-repository-declaration

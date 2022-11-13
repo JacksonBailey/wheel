@@ -5,11 +5,13 @@ plugins {
 
 dependencies {
     api(platform(project(":platform")))
+
     compileOnly("org.jetbrains:annotations")
-    implementation("org.slf4j:slf4j-api")
+
     testImplementation("org.assertj:assertj-core")
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("org.mockito:mockito-core")
     testImplementation("org.mockito:mockito-junit-jupiter")
-    testRuntimeOnly("org.slf4j:slf4j-simple")
 }
