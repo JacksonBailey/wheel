@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * A simple client that requests a greeting from the {@link VexillumServer}.
+ * A simple client that requests a greeting from the {@code VexillumServer}.
  */
 public class VexillumClient {
 
