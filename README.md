@@ -46,3 +46,12 @@ For now these are a few of the ideas I have.
 - Database
 - Distributed database
 - Test framework with tests directly in classes
+
+Licensing
+---------
+
+As a whole this repository is licensed under [AGPL-3.0-or-later][agpl]. Each individual subproject
+may have different licenses. As an example, the collections project uses [LGPL-3.0-or-later][lgpl].
+
+[agpl]: https://www.gnu.org/licenses/agpl-3.0.txt
+[lgpl]: https://www.gnu.org/licenses/lgpl-3.0.txt
