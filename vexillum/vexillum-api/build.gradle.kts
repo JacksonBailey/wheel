@@ -30,9 +30,8 @@ protobuf {
         }
     }
     generateProtoTasks {
-        // all() to configure all
-        ofSourceSet("main").forEach {
-            it.plugins {
+        all().forEach { task ->
+            task.plugins {
                 id("grpc") {}
             }
         }
