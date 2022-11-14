@@ -1,4 +1,4 @@
-package dev.jacksonbailey.wheel.vexillum.protos;
+package dev.jacksonbailey.wheel.vexillum.api;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -6,17 +6,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.ByteArrayOutputStream;
 import org.junit.jupiter.api.Test;
 
-class HelloRequestTest {
+class HelloReplyTest {
 
   @Test
   void test() throws Exception {
-    var name = "Jackson";
-    var expected = HelloRequest.newBuilder().setName(name).build();
+    var message = "Howdy!";
+    var expected = HelloReply.newBuilder().setMessage(message).build();
     var byteStream = new ByteArrayOutputStream();
     expected.writeTo(byteStream);
-    var actual = HelloRequest.parseFrom(byteStream.toByteArray());
+    var actual = HelloReply.parseFrom(byteStream.toByteArray());
     assertAll(
-        () -> assertEquals(name, actual.getName()),
+        () -> assertEquals(message, actual.getMessage()),
         () -> assertEquals(actual, expected)
     );
   }

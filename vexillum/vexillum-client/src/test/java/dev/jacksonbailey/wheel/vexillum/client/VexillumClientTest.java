@@ -1,4 +1,4 @@
-package dev.jacksonbailey.wheel.vexillum;
+package dev.jacksonbailey.wheel.vexillum.client;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.AdditionalAnswers.delegatesTo;
@@ -6,9 +6,10 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import dev.jacksonbailey.wheel.vexillum.protos.GreeterGrpc;
-import dev.jacksonbailey.wheel.vexillum.protos.HelloReply;
-import dev.jacksonbailey.wheel.vexillum.protos.HelloRequest;
+import dev.jacksonbailey.wheel.vexillum.api.HelloReply;
+import dev.jacksonbailey.wheel.vexillum.api.GreeterGrpc;
+import dev.jacksonbailey.wheel.vexillum.api.HelloRequest;
+import dev.jacksonbailey.wheel.vexillum.client.VexillumClient;
 import io.grpc.ManagedChannel;
 import io.grpc.inprocess.InProcessChannelBuilder;
 import io.grpc.inprocess.InProcessServerBuilder;
@@ -18,7 +19,6 @@ import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.ArgumentMatchers;
 
 
 /**
@@ -40,14 +40,11 @@ class VexillumClientTest {
   private final GreeterGrpc.GreeterImplBase serviceImpl =
       mock(GreeterGrpc.GreeterImplBase.class, delegatesTo(
           new GreeterGrpc.GreeterImplBase() {
-            // By default the client will receive Status.UNIMPLEMENTED for all RPCs.
-            // You might need to implement necessary behaviors for your test here, like this:
-            //
-            /*@Override
+            @Override
             public void sayHello(HelloRequest request, StreamObserver<HelloReply> respObserver) {
               respObserver.onNext(HelloReply.getDefaultInstance());
               respObserver.onCompleted();
-            }*/
+            }
           }));
 
   private VexillumClient client;

@@ -1,11 +1,12 @@
-package dev.jacksonbailey.wheel.vexillum;
+package dev.jacksonbailey.wheel.vexillum.server;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import dev.jacksonbailey.wheel.vexillum.VexillumServer.GreeterImpl;
-import dev.jacksonbailey.wheel.vexillum.protos.GreeterGrpc;
-import dev.jacksonbailey.wheel.vexillum.protos.HelloReply;
-import dev.jacksonbailey.wheel.vexillum.protos.HelloRequest;
+import dev.jacksonbailey.wheel.vexillum.server.VexillumServer;
+import dev.jacksonbailey.wheel.vexillum.server.VexillumServer.GreeterImpl;
+import dev.jacksonbailey.wheel.vexillum.api.GreeterGrpc;
+import dev.jacksonbailey.wheel.vexillum.api.HelloReply;
+import dev.jacksonbailey.wheel.vexillum.api.HelloRequest;
 import io.grpc.inprocess.InProcessChannelBuilder;
 import io.grpc.inprocess.InProcessServerBuilder;
 import io.grpc.testing.GrpcCleanupRule;
@@ -16,7 +17,7 @@ import org.junit.jupiter.api.Test;
  * Unit tests for {@link VexillumServer}.
  * For demonstrating how to write gRPC unit test only.
  * Not intended to provide a high code coverage or to test every major usecase.
- *
+ * <p>
  * directExecutor() makes it easier to have deterministic tests.
  */
 public class VexillumServerTest {

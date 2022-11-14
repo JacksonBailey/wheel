@@ -1,8 +1,8 @@
-package dev.jacksonbailey.wheel.vexillum;
+package dev.jacksonbailey.wheel.vexillum.server;
 
-import dev.jacksonbailey.wheel.vexillum.protos.GreeterGrpc;
-import dev.jacksonbailey.wheel.vexillum.protos.HelloReply;
-import dev.jacksonbailey.wheel.vexillum.protos.HelloRequest;
+import dev.jacksonbailey.wheel.vexillum.api.GreeterGrpc;
+import dev.jacksonbailey.wheel.vexillum.api.HelloReply;
+import dev.jacksonbailey.wheel.vexillum.api.HelloRequest;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
