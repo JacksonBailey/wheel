@@ -1,8 +1,8 @@
-package dev.jacksonbailey.wheel.vexillum;
+package dev.jacksonbailey.wheel.vexillum.client;
 
-import dev.jacksonbailey.wheel.vexillum.protos.GreeterGrpc;
-import dev.jacksonbailey.wheel.vexillum.protos.HelloReply;
-import dev.jacksonbailey.wheel.vexillum.protos.HelloRequest;
+import dev.jacksonbailey.wheel.vexillum.api.GreeterGrpc;
+import dev.jacksonbailey.wheel.vexillum.api.HelloReply;
+import dev.jacksonbailey.wheel.vexillum.api.HelloRequest;
 import io.grpc.Channel;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;

@@ -6,7 +6,6 @@ plugins {
     id("com.google.protobuf") version "0.9.1"
 }
 
-
 dependencies {
     implementation(platform(project(":platform")))
 

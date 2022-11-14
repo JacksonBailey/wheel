@@ -1,4 +1,4 @@
-package dev.jacksonbailey.wheel.vexillum.protos;
+package dev.jacksonbailey.wheel.vexillum.api;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
