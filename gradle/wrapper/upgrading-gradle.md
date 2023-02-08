@@ -38,13 +38,15 @@ newest_gradle_version="$(curl --silent ${newest_gradle_url} | jq --raw-output '.
 newest_gradle_sha256_sum="$(curl --silent --location \
     $(curl --silent ${newest_gradle_url} | jq --raw-output '.checksumUrl'))"
 
-gradle wrapper --gradle-version "${newest_gradle_version}" \
+./gradlew wrapper --gradle-version "${newest_gradle_version}" \
                --distribution-type bin \
                --gradle-distribution-sha256-sum "${newest_gradle_sha256_sum}" \
+               --no-build-cache \
     && \
-gradle wrapper --gradle-version "${newest_gradle_version}" \
+./gradlew wrapper --gradle-version "${newest_gradle_version}" \
                --distribution-type bin \
-               --gradle-distribution-sha256-sum "${newest_gradle_sha256_sum}"
+               --gradle-distribution-sha256-sum "${newest_gradle_sha256_sum}" \
+               --no-build-cache
 ```
 
 ## Verifying
@@ -54,7 +56,7 @@ it is extremely important to verify the Gradle Wrapper JAR from untrusted
 repos.)***
 
 ```sh
-cd gradle/wrapper
+pushd gradle/wrapper
 
 curl --silent --location --output gradle-wrapper.jar.sha256 \
     "$(curl --silent ${newest_gradle_url} | jq --raw-output '.wrapperChecksumUrl')"
@@ -64,6 +66,8 @@ sha256sum --check gradle-wrapper.jar.sha256 # shasum on macOS
 # Output should be "gradle-wrapper.jar: OK"
 
 rm gradle-wrapper.jar.sha256 # Keeping this provides no benefit as an attacker could modify it too
+
+popd
 ```
 
 [upgrading]: https://docs.gradle.org/current/userguide/gradle_wrapper.html#sec:upgrading_wrapper
