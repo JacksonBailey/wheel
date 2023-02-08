@@ -2,6 +2,7 @@ rootProject.name = "wheel"
 include(
     "platform",
     "collections",
+    "vexillum",
     "vexillum:vexillum-api",
     "vexillum:vexillum-client",
     "vexillum:vexillum-server"
