@@ -3,7 +3,7 @@ import com.google.protobuf.gradle.id
 plugins {
     id("dev.jacksonbailey.wheel.java-library-conventions")
     id("dev.jacksonbailey.wheel.shut-up-javadoc")
-    id("com.google.protobuf") version "0.9.1"
+    id("com.google.protobuf") version "0.9.2"
 }
 
 dependencies {
