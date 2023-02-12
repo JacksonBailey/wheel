@@ -6,8 +6,8 @@ include(
     "vexillum:vexillum-api",
     "vexillum:vexillum-client",
     "vexillum:vexillum-core",
-    "vexillum:vexillum-jooq-codegen",
     "vexillum:vexillum-db",
+    "vexillum:vexillum-jooq-codegen",
     "vexillum:vexillum-server"
 )
 
