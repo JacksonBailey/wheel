@@ -8,6 +8,8 @@ dependencies {
     implementation(platform(project(":platform")))
     implementation(project(":vexillum:vexillum-api"))
 
+    compileOnly("org.jetbrains:annotations")
+
     api("io.grpc:grpc-api")
 
     implementation("org.slf4j:slf4j-api")

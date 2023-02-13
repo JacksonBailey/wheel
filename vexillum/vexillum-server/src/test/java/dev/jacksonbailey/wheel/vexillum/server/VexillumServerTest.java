@@ -1,12 +1,13 @@
 package dev.jacksonbailey.wheel.vexillum.server;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import dev.jacksonbailey.wheel.vexillum.server.VexillumServer;
-import dev.jacksonbailey.wheel.vexillum.server.VexillumServer.GreeterImpl;
-import dev.jacksonbailey.wheel.vexillum.api.GreeterGrpc;
-import dev.jacksonbailey.wheel.vexillum.api.HelloReply;
-import dev.jacksonbailey.wheel.vexillum.api.HelloRequest;
+import dev.jacksonbailey.wheel.vexillum.api.Flag;
+import dev.jacksonbailey.wheel.vexillum.api.FlagServiceGrpc;
+import dev.jacksonbailey.wheel.vexillum.api.GetFlagStateRequest;
+import dev.jacksonbailey.wheel.vexillum.api.SetFlagStateRequest;
+import dev.jacksonbailey.wheel.vexillum.server.VexillumServer.FlagServiceImpl;
 import io.grpc.inprocess.InProcessChannelBuilder;
 import io.grpc.inprocess.InProcessServerBuilder;
 import io.grpc.testing.GrpcCleanupRule;
@@ -30,23 +31,35 @@ public class VexillumServerTest {
    * behaviors or state changes from the client side.
    */
   @Test
-  public void greeterImpl_replyMessage() throws Exception {
+  public void flagServiceImpl_replyMessage() throws Exception {
     // Generate a unique in-process server name.
     String serverName = InProcessServerBuilder.generateName();
 
     // Create a server, add service, start, and register for automatic graceful shutdown.
     grpcCleanup.register(InProcessServerBuilder
-        .forName(serverName).directExecutor().addService(new GreeterImpl()).build().start());
+        .forName(serverName).directExecutor().addService(new FlagServiceImpl()).build().start());
 
-    GreeterGrpc.GreeterBlockingStub blockingStub = GreeterGrpc.newBlockingStub(
+    FlagServiceGrpc.FlagServiceBlockingStub blockingStub = FlagServiceGrpc.newBlockingStub(
         // Create a client channel and register for automatic graceful shutdown.
         grpcCleanup.register(InProcessChannelBuilder.forName(serverName).directExecutor().build()));
 
+    var flagName = "test name";
 
-    HelloReply reply =
-        blockingStub.sayHello(HelloRequest.newBuilder().setName( "test name").build());
+    var expectedFlag = Flag.newBuilder().setName(flagName).setState(true).build();
 
-    assertEquals("Hello test name", reply.getMessage());
+    var setReply = blockingStub.setFlagState(
+        SetFlagStateRequest.newBuilder()
+                           .setNewFlag(expectedFlag)
+                           .build()
+    );
+
+    assertFalse(setReply.hasPreviousFlag());
+
+    var getReply = blockingStub.getFlagState(
+        GetFlagStateRequest.newBuilder().setName(flagName).build()
+    );
+
+    assertEquals(expectedFlag, getReply.getCurrentFlag());
   }
 
 }

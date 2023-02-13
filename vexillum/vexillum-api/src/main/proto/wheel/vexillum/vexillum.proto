@@ -7,14 +7,28 @@ option java_outer_classname = "VexillumProtos";
 option java_multiple_files = true;
 option java_string_check_utf8 = true;
 
-service Greeter {
-  rpc SayHello (HelloRequest) returns (HelloReply) {}
+service FlagService {
+  rpc GetFlagState (GetFlagStateRequest) returns (GetFlagStateReply);
+  rpc SetFlagState (SetFlagStateRequest) returns (SetFlagStateReply);
 }
 
-message HelloRequest {
+message GetFlagStateRequest {
   optional string name = 1;
 }
 
-message HelloReply {
-  optional string message = 1;
+message GetFlagStateReply {
+  optional Flag currentFlag = 1;
+}
+
+message SetFlagStateRequest {
+  optional Flag newFlag = 1;
+}
+
+message SetFlagStateReply {
+  optional Flag previousFlag = 1;
+}
+
+message Flag {
+  optional string name = 1;
+  optional bool state = 2;
 }

@@ -1,15 +1,17 @@
 package dev.jacksonbailey.wheel.vexillum.client;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.AdditionalAnswers.delegatesTo;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import dev.jacksonbailey.wheel.vexillum.api.HelloReply;
-import dev.jacksonbailey.wheel.vexillum.api.GreeterGrpc;
-import dev.jacksonbailey.wheel.vexillum.api.HelloRequest;
-import dev.jacksonbailey.wheel.vexillum.client.VexillumClient;
+import dev.jacksonbailey.wheel.vexillum.api.FlagServiceGrpc;
+import dev.jacksonbailey.wheel.vexillum.api.GetFlagStateReply;
+import dev.jacksonbailey.wheel.vexillum.api.GetFlagStateRequest;
+import dev.jacksonbailey.wheel.vexillum.api.SetFlagStateReply;
+import dev.jacksonbailey.wheel.vexillum.api.SetFlagStateRequest;
 import io.grpc.ManagedChannel;
 import io.grpc.inprocess.InProcessChannelBuilder;
 import io.grpc.inprocess.InProcessServerBuilder;
@@ -37,12 +39,19 @@ class VexillumClientTest {
   @Rule
   public final GrpcCleanupRule grpcCleanup = new GrpcCleanupRule();
 
-  private final GreeterGrpc.GreeterImplBase serviceImpl =
-      mock(GreeterGrpc.GreeterImplBase.class, delegatesTo(
-          new GreeterGrpc.GreeterImplBase() {
+  private final FlagServiceGrpc.FlagServiceImplBase serviceImpl =
+      mock(FlagServiceGrpc.FlagServiceImplBase.class, delegatesTo(
+          new FlagServiceGrpc.FlagServiceImplBase() {
             @Override
-            public void sayHello(HelloRequest request, StreamObserver<HelloReply> respObserver) {
-              respObserver.onNext(HelloReply.getDefaultInstance());
+            public void getFlagState(GetFlagStateRequest request,
+                StreamObserver<GetFlagStateReply> respObserver) {
+              respObserver.onNext(GetFlagStateReply.getDefaultInstance());
+              respObserver.onCompleted();
+            }
+            @Override
+            public void setFlagState(SetFlagStateRequest request,
+                StreamObserver<SetFlagStateReply> respObserver) {
+              respObserver.onNext(SetFlagStateReply.getDefaultInstance());
               respObserver.onCompleted();
             }
           }));
@@ -71,14 +80,30 @@ class VexillumClientTest {
    * changes from the server side.
    */
   @Test
-  public void greet_messageDeliveredToServer() {
-    var requestCaptor = ArgumentCaptor.forClass(HelloRequest.class);
+  public void getFlag_messageDeliveredToServer() {
+    var requestCaptor = ArgumentCaptor.forClass(GetFlagStateRequest.class);
 
-    client.greet("test name");
+    client.getFlag("test name");
 
-    verify(serviceImpl).sayHello(any(), any());
-    verify(serviceImpl).sayHello(requestCaptor.capture(), any());
+    verify(serviceImpl).getFlagState(any(), any());
+    verify(serviceImpl).getFlagState(requestCaptor.capture(), any());
     assertEquals("test name", requestCaptor.getValue().getName());
+  }
+
+  /**
+   * To test the client, call from the client against the fake server, and verify behaviors or state
+   * changes from the server side.
+   */
+  @Test
+  public void setFlag_messageDeliveredToServer() {
+    var requestCaptor = ArgumentCaptor.forClass(SetFlagStateRequest.class);
+
+    client.setFlag("test name", true);
+
+    verify(serviceImpl).setFlagState(any(), any());
+    verify(serviceImpl).setFlagState(requestCaptor.capture(), any());
+    assertEquals("test name", requestCaptor.getValue().getNewFlag().getName());
+    assertTrue(requestCaptor.getValue().getNewFlag().getState());
   }
 
 }

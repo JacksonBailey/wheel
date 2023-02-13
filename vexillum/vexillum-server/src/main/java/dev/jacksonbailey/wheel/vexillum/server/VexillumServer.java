@@ -1,18 +1,23 @@
 package dev.jacksonbailey.wheel.vexillum.server;
 
-import dev.jacksonbailey.wheel.vexillum.api.GreeterGrpc;
-import dev.jacksonbailey.wheel.vexillum.api.HelloReply;
-import dev.jacksonbailey.wheel.vexillum.api.HelloRequest;
+import dev.jacksonbailey.wheel.vexillum.api.Flag;
+import dev.jacksonbailey.wheel.vexillum.api.FlagServiceGrpc;
+import dev.jacksonbailey.wheel.vexillum.api.GetFlagStateReply;
+import dev.jacksonbailey.wheel.vexillum.api.GetFlagStateRequest;
+import dev.jacksonbailey.wheel.vexillum.api.SetFlagStateReply;
+import dev.jacksonbailey.wheel.vexillum.api.SetFlagStateRequest;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Server that manages startup/shutdown of a {@code Greeter} server.
+ * Server that manages startup/shutdown of a {@code FlagService} server.
  */
 public class VexillumServer {
 
@@ -24,7 +29,7 @@ public class VexillumServer {
     /* The port on which the server should run */
     int port = 50051;
     server = ServerBuilder.forPort(port)
-                          .addService(new GreeterImpl())
+                          .addService(new FlagServiceImpl())
                           .build()
                           .start();
     log.info("Server started, listening on {}", port);
@@ -67,12 +72,49 @@ public class VexillumServer {
     server.blockUntilShutdown();
   }
 
-  static class GreeterImpl extends GreeterGrpc.GreeterImplBase {
+  static class FlagServiceImpl extends FlagServiceGrpc.FlagServiceImplBase {
+
+    private final Map<String, Boolean> dataStore = new HashMap<>();
 
     @Override
-    public void sayHello(HelloRequest req, StreamObserver<HelloReply> responseObserver) {
-      HelloReply reply = HelloReply.newBuilder().setMessage("Hello " + req.getName()).build();
-      responseObserver.onNext(reply);
+    public void getFlagState(GetFlagStateRequest req,
+        StreamObserver<GetFlagStateReply> responseObserver) {
+
+      var flagName = req.getName();
+      var replyBuilder = GetFlagStateReply.newBuilder();
+
+      if (dataStore.containsKey(flagName)) {
+        replyBuilder.setCurrentFlag(
+            Flag.newBuilder()
+                .setName(flagName)
+                .setState(dataStore.get(flagName))
+                .build()
+        );
+      }
+
+      responseObserver.onNext(replyBuilder.build());
+      responseObserver.onCompleted();
+    }
+
+    @Override
+    public void setFlagState(SetFlagStateRequest req,
+        StreamObserver<SetFlagStateReply> responseObserver) {
+
+      var flagName = req.getNewFlag().getName();
+      var replyBuilder = SetFlagStateReply.newBuilder();
+
+      if (dataStore.containsKey(flagName)) {
+        replyBuilder.setPreviousFlag(
+            Flag.newBuilder()
+                .setName(flagName)
+                .setState(dataStore.get(flagName))
+                .build()
+        );
+      }
+
+      dataStore.put(flagName, req.getNewFlag().getState());
+
+      responseObserver.onNext(replyBuilder.build());
       responseObserver.onCompleted();
     }
   }
