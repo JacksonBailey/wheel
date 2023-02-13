@@ -7,7 +7,7 @@ plugins {
 dependencies {
     implementation(platform(project(":platform")))
     implementation(project(":vexillum:vexillum-core"))
-    implementation(project(":vexillum:vexillum-jooq-codegen"))
+    implementation(project(":vexillum:vexillum-sqlite"))
 
     implementation("org.xerial:sqlite-jdbc")
 

@@ -7,8 +7,8 @@ include(
     "vexillum:vexillum-client",
     "vexillum:vexillum-core",
     "vexillum:vexillum-db",
-    "vexillum:vexillum-jooq-codegen",
-    "vexillum:vexillum-server"
+    "vexillum:vexillum-server",
+    "vexillum:vexillum-sqlite"
 )
 
 dependencyResolutionManagement {
