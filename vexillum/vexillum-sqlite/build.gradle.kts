@@ -25,8 +25,8 @@ dependencies {
     jooqGenerator(libs.sqlite.jdbc)
 }
 
-val dbDir = "$buildDir/generated/db"
-val jdbcUrl = "jdbc:sqlite:$dbDir/vexillum.sqlite"
+val dbFile = file("$buildDir/generated/db/vexillum.sqlite")
+val jdbcUrl = "jdbc:sqlite:${dbFile.path}"
 
 tasks {
     val createDbFile = register("createDbFile") {
@@ -34,7 +34,7 @@ tasks {
 
         // TODO Make this a plugin? https://docs.gradle.org/current/userguide/tutorial_using_tasks.html#sec:build_script_external_dependencies
         doLast {
-            mkdir(dbDir)
+            dbFile.parentFile.mkdirs()
             DriverManager.getConnection(jdbcUrl).close()
         }
     }
@@ -75,10 +75,7 @@ jooq {
                         isPojos = true
                         isPojosAsJavaRecordClasses = true;
                     }
-                    target.apply {
-                        packageName = "dev.jacksonbailey.vexillum.db.jooq"
-                        directory = "$buildDir/generated/sources/jooq/main"
-                    }
+                    target.packageName = "dev.jacksonbailey.vexillum.db.jooq"
                     strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"
                 }
             }
