@@ -9,8 +9,11 @@ dependencies {
     implementation(project(":vexillum:vexillum-core"))
     implementation(project(":vexillum:vexillum-sqlite"))
 
+    implementation("org.jooq:jooq")
+    implementation("org.slf4j:slf4j-api")
     implementation("org.xerial:sqlite-jdbc")
 
+    testImplementation("org.flywaydb:flyway-core")
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
 

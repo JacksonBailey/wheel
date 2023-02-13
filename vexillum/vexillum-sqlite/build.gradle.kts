@@ -25,7 +25,7 @@ dependencies {
     jooqGenerator(libs.sqlite.jdbc)
 }
 
-val dbFile = file("$buildDir/generated/db/vexillum.sqlite")
+val dbFile = file("$buildDir/generated/db/vexillum.sqlite") // TODO Where to store this file?
 val jdbcUrl = "jdbc:sqlite:${dbFile.path}"
 
 tasks {
