@@ -18,7 +18,7 @@ public class FlywayMigrator implements BeforeEachCallback {
   @Override
   public void beforeEach(ExtensionContext context) {
     touchDatabase();
-    migrate();
+    remakeDatabase();
   }
 
   private void touchDatabase() {
@@ -35,7 +35,7 @@ public class FlywayMigrator implements BeforeEachCallback {
     }
   }
 
-  private void migrate() {
+  private void remakeDatabase() {
     var flyway = Flyway.configure()
                        .dataSource(DbConfig.jdbcUrl, null, null)
                        .cleanDisabled(false)
