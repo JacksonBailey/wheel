@@ -20,8 +20,8 @@ dependencyResolutionManagement {
     // Declared outside :platform so protobuf plugin can use the same versions as depencencies
     versionCatalogs {
         create("libs") {
-            version("protobufVersion", "3.21.12") // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-bom
-            version("grpcVersion", "1.52.1") // https://mvnrepository.com/artifact/io.grpc/grpc-all
+            version("protobufVersion", "3.22.0") // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-bom
+            version("grpcVersion", "1.53.0") // https://mvnrepository.com/artifact/io.grpc/grpc-all
             version("sqliteJdbcVersion", "3.40.1.0") // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
 
             library("protobuf-bom", "com.google.protobuf", "protobuf-bom").versionRef("protobufVersion")
