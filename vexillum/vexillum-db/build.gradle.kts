@@ -9,7 +9,7 @@ dependencies {
     implementation(project(":vexillum:vexillum-core"))
     implementation(project(":vexillum:vexillum-sqlite"))
 
-    implementation("org.jooq:jooq")
+    implementation("org.jooq:jooq:3.17.8")
     implementation("org.slf4j:slf4j-api")
     implementation("org.xerial:sqlite-jdbc")
 

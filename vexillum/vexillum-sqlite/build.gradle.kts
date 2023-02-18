@@ -51,6 +51,7 @@ flyway {
 }
 
 jooq {
+    version.set("3.17.8") // TODO Get this programmatically
     configurations {
         create("main") {
             jooqConfiguration.apply {
