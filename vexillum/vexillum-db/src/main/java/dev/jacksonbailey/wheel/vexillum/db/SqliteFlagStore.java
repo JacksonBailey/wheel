@@ -25,6 +25,7 @@ public class SqliteFlagStore implements FlagStore {
     Flyway.configure()
           .dataSource(connectionString, null, null)
           .loggers("slf4j")
+          .initSql("PRAGMA foreign_keys = ON;") // TODO Use a Flyway config file
           .load()
           .migrate();
   }
