@@ -1,29 +1,32 @@
 package dev.jacksonbailey.wheel.vexillum.db;
 
-import dev.jacksonbailey.vexillum.db.jooq.tables.Flag;
+import static dev.jacksonbailey.vexillum.db.jooq.Tables.FLAG;
+
+import dev.jacksonbailey.vexillum.db.jooq.tables.records.FlagRecord;
 import dev.jacksonbailey.wheel.vexillum.FlagStore;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Optional;
 import java.util.function.Supplier;
+import org.flywaydb.core.Flyway;
+import org.jetbrains.annotations.Range;
+import org.jooq.CloseableDSLContext;
+import org.jooq.impl.DSL;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SqliteFlagStore implements FlagStore {
 
-  private final Supplier<Connection> connectionSupplier;
+  private static final Logger log = LoggerFactory.getLogger(SqliteFlagStore.class);
+
+  private final Supplier<CloseableDSLContext> createSupplier;
 
   public SqliteFlagStore(String connectionString) {
-    connectionSupplier = () -> {
-      try {
-        return DriverManager.getConnection(connectionString);
-      } catch (SQLException e) {
-        throw new RuntimeException(e);
-      }
-    };
-  }
-
-  public static SqliteFlagStore inMemory() {
-    return new SqliteFlagStore("jdbc:sqlite::memory:");
+    createSupplier = () -> DSL.using(connectionString);
+    log.debug("Creating a new flag store with connection string '{}'", connectionString);
+    Flyway.configure()
+          .dataSource(connectionString, null, null)
+          .loggers("slf4j")
+          .load()
+          .migrate();
   }
 
   @Override
@@ -31,8 +34,33 @@ public class SqliteFlagStore implements FlagStore {
     return Optional.empty();
   }
 
-  private void ignoreThisMethod() {
-    // This is just for testing that the Jooq stuff is on the classpath
-    var flag = Flag.FLAG;
+  public Optional<Boolean> upsertFlag(String flagName, boolean state) {
+    Optional<FlagRecord> prev;
+    try (var create = createSupplier.get()) {
+      prev = create.selectFrom(FLAG)
+                   .where(FLAG.NAME.eq(flagName))
+                   .fetchOptional();
+      create.insertInto(FLAG, FLAG.NAME, FLAG.STATE)
+            .values(flagName, boolToInt(state))
+            .onConflict(FLAG.NAME)
+            .doUpdate()
+            .set(FLAG.STATE, boolToInt(state))
+            .execute();
+    }
+    return prev.map(FlagRecord::getState)
+               .map(SqliteFlagStore::intToBool);
+  }
+
+  private static int boolToInt(boolean b) {
+    log.trace("Converting {}", b);
+    if (b) {
+      return 1;
+    }
+    return 0;
+  }
+
+  private static boolean intToBool(@Range(from = 0, to = 1) int i) {
+    log.trace("Converting {}", i);
+    return i != 0;
   }
 }

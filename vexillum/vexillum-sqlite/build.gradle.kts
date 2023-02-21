@@ -51,6 +51,7 @@ flyway {
 }
 
 jooq {
+    version.set(libs.versions.jooqVersion)
     configurations {
         create("main") {
             jooqConfiguration.apply {
@@ -81,4 +82,10 @@ jooq {
             }
         }
     }
+}
+
+tasks.withType<JooqGenerate> {
+    // TODO Check if this is right
+    inputs.file(dbFile)
+    allInputsDeclared.set(true)
 }
