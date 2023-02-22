@@ -20,6 +20,11 @@ made if I had the freedom to make them. I'm sure if any seasoned wheel makers se
 they might shake their heads at the foolishness of some of my designs, but perhaps they'll smile
 remembering how they too thought doing certain things was a good idea early on when they were naive.
 
+I say all that but this project is quickly turning into me just working on random things I feel like
+working on. That's fine. I have a tendency to restart projects from scratch all the time. Having
+something of a "monorepo" to keep all my projects in with my preferences will do me well so I don't
+waste time bikeshedding.
+
 Goals
 -----
 
@@ -55,3 +60,9 @@ may have different licenses. As an example, the collections project uses [LGPL-3
 
 [agpl]: https://www.gnu.org/licenses/agpl-3.0.txt
 [lgpl]: https://www.gnu.org/licenses/lgpl-3.0.txt
+
+Development guide
+-----------------
+
+For information for developers working on this (mostly for future reference by me) please see the
+[DEV_GUIDE.md](DEV_GUIDE.md) file.
