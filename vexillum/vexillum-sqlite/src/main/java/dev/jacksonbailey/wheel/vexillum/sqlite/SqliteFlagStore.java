@@ -1,8 +1,8 @@
-package dev.jacksonbailey.wheel.vexillum.db;
+package dev.jacksonbailey.wheel.vexillum.sqlite;
 
-import static dev.jacksonbailey.vexillum.db.jooq.Tables.FLAG;
+import static dev.jacksonbailey.wheel.vexillum.sqlite.jooq.Tables.FLAG;
 
-import dev.jacksonbailey.vexillum.db.jooq.tables.records.FlagRecord;
+import dev.jacksonbailey.wheel.vexillum.sqlite.jooq.tables.records.FlagRecord;
 import dev.jacksonbailey.wheel.vexillum.FlagStore;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -20,14 +20,23 @@ public class SqliteFlagStore implements FlagStore {
   private final Supplier<CloseableDSLContext> createSupplier;
 
   public SqliteFlagStore(String connectionString) {
-    createSupplier = () -> DSL.using(connectionString);
+    createSupplier = () -> contextSupplier(connectionString);
     log.debug("Creating a new flag store with connection string '{}'", connectionString);
     Flyway.configure()
           .dataSource(connectionString, null, null)
           .loggers("slf4j")
+          .locations("classpath:db/migration")
           .initSql("PRAGMA foreign_keys = ON;") // TODO Use a Flyway config file
           .load()
           .migrate();
+  }
+
+  private static CloseableDSLContext contextSupplier(String connectionString) {
+    var create = DSL.using(connectionString);
+    // SQLite does not respect foreign keys by default
+    // I am unsure if jOOQ automatically enables this
+    create.execute("PRAGMA foreign_keys = ON;");
+    return create;
   }
 
   @Override

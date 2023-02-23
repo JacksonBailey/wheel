@@ -1,4 +1,4 @@
-package dev.jacksonbailey.wheel.vexillum.db;
+package dev.jacksonbailey.wheel.vexillum.sqlite;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

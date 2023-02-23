@@ -38,13 +38,13 @@ dependencies {
 val sqliteInitScript = "PRAGMA foreign_keys = ON;"
 val dbFile = file("$buildDir/generated/db/vexillum.sqlite") // TODO Where to store this file?
 val jdbcUrl = "jdbc:sqlite:${dbFile.path}"
-val flywayMigrationLocation = file("$projectDir/src/main/resources/db/migration")
+val flywayMigrationLocationOnDisk = file("$projectDir/src/main/resources/db/migration")
 val jooqOutputDir = file("$buildDir/generated/sources/jooq")
 
 tasks {
     val createDbFile = register("createDbFile") {
         // Creates the database file if it does not exist.
-        inputs.dir(flywayMigrationLocation)
+        inputs.dir(flywayMigrationLocationOnDisk)
         outputs.file(dbFile)
 
         // TODO Make this a plugin? https://docs.gradle.org/current/userguide/tutorial_using_tasks.html#sec:build_script_external_dependencies
@@ -59,7 +59,7 @@ tasks {
     withType<JooqGenerate> {
         dependsOn(createDbFile, "flywayMigrate")
         inputs.file(dbFile)
-        inputs.dir(flywayMigrationLocation)
+        inputs.dir(flywayMigrationLocationOnDisk)
         outputs.dir(jooqOutputDir)
         allInputsDeclared.set(true)
     }
@@ -68,7 +68,7 @@ tasks {
 flyway {
     url = jdbcUrl
     initSql = sqliteInitScript
-    locations = arrayOf("filesystem:${flywayMigrationLocation.path}")
+    locations = arrayOf("filesystem:${flywayMigrationLocationOnDisk.path}")
 }
 
 jooq {
@@ -91,7 +91,7 @@ jooq {
                         isGeneratedAnnotation = true
                     }
                     target.apply {
-                        packageName = "dev.jacksonbailey.vexillum.db.jooq"
+                        packageName = "dev.jacksonbailey.wheel.vexillum.sqlite.jooq"
                         directory = jooqOutputDir.path
                     }
                     strategy.name = "org.jooq.codegen.DefaultGeneratorStrategy"
