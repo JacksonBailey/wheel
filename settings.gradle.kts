@@ -22,7 +22,7 @@ dependencyResolutionManagement {
         create("libs") {
             val protobufVersion = version("protobufVersion", "3.22.0") // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-bom
             val grpcVersion = version("grpcVersion", "1.53.0") // https://mvnrepository.com/artifact/io.grpc/grpc-all
-            val sqliteJdbcVersion = version("sqliteJdbcVersion", "3.40.1.0") // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+            val sqliteJdbcVersion = version("sqliteJdbcVersion", "3.41.0.0") // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
             val jooqVersion = version("jooqVersion", "3.17.8") // https://mvnrepository.com/artifact/org.jooq/jooq
 
             library("protobuf-bom", "com.google.protobuf", "protobuf-bom").versionRef(protobufVersion)

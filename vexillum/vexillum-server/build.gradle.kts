@@ -7,8 +7,6 @@ plugins {
 dependencies {
     implementation(platform(project(":platform")))
     implementation(project(":vexillum:vexillum-api"))
-    implementation(project(":vexillum:vexillum-core"))
-    implementation(project(":vexillum:vexillum-sqlite"))
 
     implementation("io.grpc:grpc-api")
     implementation("io.grpc:grpc-stub")

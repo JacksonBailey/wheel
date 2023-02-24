@@ -6,7 +6,7 @@ plugins {
     id("dev.jacksonbailey.wheel.java-library-conventions")
     id("dev.jacksonbailey.wheel.shut-up-javadoc")
     id("nu.studer.jooq") version "8.1"
-    id("org.flywaydb.flyway") version "9.14.1"
+    id("org.flywaydb.flyway") version "9.15.1"
 }
 
 buildscript {
@@ -17,6 +17,7 @@ buildscript {
 
 dependencies {
     api(project(":vexillum:vexillum-core"))
+    api(libs.jooq)
 
     compileOnly("org.jetbrains:annotations")
 
@@ -24,7 +25,6 @@ dependencies {
 
     implementation("org.flywaydb:flyway-core")
     implementation("org.slf4j:slf4j-api")
-    implementation(libs.jooq)
 
     runtimeOnly("org.slf4j:slf4j-simple")
     runtimeOnly("org.xerial:sqlite-jdbc")
