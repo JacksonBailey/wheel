@@ -5,9 +5,7 @@ plugins {
 
 dependencies {
     api(platform(project(":platform")))
-
     compileOnly("org.jetbrains:annotations")
-
     testImplementation("org.assertj:assertj-core")
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.junit.jupiter:junit-jupiter-api")

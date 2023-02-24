@@ -7,9 +7,6 @@ javaPlatform {
 }
 
 dependencies {
-    api(platform(libs.protobuf.bom))
-    api(libs.grpc.all)
-    api(libs.sqlite.jdbc)
     api("javax.annotation:javax.annotation-api:1.3.2") // https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api
     api("org.assertj:assertj-core:3.24.2") // https://mvnrepository.com/artifact/org.assertj/assertj-core
     api("org.flywaydb:flyway-core:9.15.1") // https://mvnrepository.com/artifact/org.flywaydb/flyway-core
@@ -19,4 +16,7 @@ dependencies {
     api("org.mockito:mockito-junit-jupiter:5.1.1") // https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter
     api("org.slf4j:slf4j-api:2.0.6") // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     api("org.slf4j:slf4j-simple:2.0.6") // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+    api(libs.grpc.all)
+    api(libs.sqlite.jdbc)
+    api(platform(libs.protobuf.bom))
 }

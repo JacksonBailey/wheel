@@ -1,21 +1,17 @@
 import com.google.protobuf.gradle.id
 
 plugins {
+    id("com.google.protobuf")
     id("dev.jacksonbailey.wheel.java-library-conventions")
     id("dev.jacksonbailey.wheel.shut-up-javadoc")
-    id("com.google.protobuf") version "0.9.2"
 }
 
 dependencies {
-    implementation(platform(project(":platform")))
-
-    compileOnly("javax.annotation:javax.annotation-api")
-
     api("com.google.protobuf:protobuf-java")
     api("io.grpc:grpc-api")
-
+    compileOnly("javax.annotation:javax.annotation-api")
     implementation("io.grpc:grpc-protobuf")
-
+    implementation(platform(project(":platform")))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
 }
