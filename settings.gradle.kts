@@ -15,12 +15,12 @@ include(
 pluginManagement {
     resolutionStrategy {
         eachPlugin {
-            if (requested.id.id == "com.autonomousapps.dependency-analysis") { useVersion("1.19.0") }
-            if (requested.id.id == "com.dorongold.task-tree") { useVersion("2.1.1") }
-            if (requested.id.id == "com.github.ben-manes.versions") { useVersion("0.46.0") }
-            if (requested.id.id == "com.google.protobuf") { useVersion("0.9.2") }
-            if (requested.id.id == "nu.studer.jooq") { useVersion("8.1") }
-            if (requested.id.id == "org.flywaydb.flyway") { useVersion("9.15.1") }
+            if (requested.id.id == "com.autonomousapps.dependency-analysis") { useVersion("1.32.0") } // https://github.com/autonomousapps/dependency-analysis-gradle-plugin/tags
+            if (requested.id.id == "com.dorongold.task-tree") { useVersion("3.0.0") } // https://github.com/dorongold/gradle-task-tree/releases
+            if (requested.id.id == "com.github.ben-manes.versions") { useVersion("0.51.0") } // https://github.com/ben-manes/gradle-versions-plugin/releases
+            if (requested.id.id == "com.google.protobuf") { useVersion("0.9.4") } // https://github.com/google/protobuf-gradle-plugin/releases
+            if (requested.id.id == "nu.studer.jooq") { useVersion("9.0") } // https://github.com/etiennestuder/gradle-jooq-plugin/releases
+            if (requested.id.id == "org.flywaydb.flyway") { useVersion("9.22.3") } // https://github.com/flyway/flyway/releases
         }
     }
 }
@@ -33,10 +33,10 @@ dependencyResolutionManagement {
 
     versionCatalogs {
         create("libs") {
-            val grpcVersion = version("grpcVersion", "1.53.0") // https://mvnrepository.com/artifact/io.grpc/grpc-all
-            val jooqVersion = version("jooqVersion", "3.17.8") // https://mvnrepository.com/artifact/org.jooq/jooq
-            val protobufVersion = version("protobufVersion", "3.22.0") // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-bom
-            val sqliteJdbcVersion = version("sqliteJdbcVersion", "3.41.0.0") // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+            val grpcVersion = version("grpcVersion", "1.64.0") // https://mvnrepository.com/artifact/io.grpc/grpc-all
+            val jooqVersion = version("jooqVersion", "3.19.9") // https://mvnrepository.com/artifact/org.jooq/jooq
+            val protobufVersion = version("protobufVersion", "4.27.1") // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-bom
+            val sqliteJdbcVersion = version("sqliteJdbcVersion", "3.46.0.0") // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
 
             library("grpc-all", "io.grpc", "grpc-all").versionRef(grpcVersion)
             library("jooq", "org.jooq", "jooq").versionRef(jooqVersion)
