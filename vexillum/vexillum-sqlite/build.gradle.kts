@@ -30,10 +30,10 @@ dependencies {
 }
 
 val sqliteInitScript = "PRAGMA foreign_keys = ON;"
-val dbFile = file("$buildDir/generated/db/vexillum.sqlite") // TODO Where to store this file?
+val dbFile = file("${layout.buildDirectory.asFile.get().path}/generated/db/vexillum.sqlite") // TODO Where to store this file?
 val jdbcUrl = "jdbc:sqlite:${dbFile.path}"
 val flywayMigrationLocationOnDisk = file("$projectDir/src/main/resources/db/migration")
-val jooqOutputDir = file("$buildDir/generated/sources/jooq")
+val jooqOutputDir = file("${layout.buildDirectory.asFile.get().path}/generated/sources/jooq")
 
 flyway {
     url = jdbcUrl
