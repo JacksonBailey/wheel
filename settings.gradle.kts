@@ -21,8 +21,13 @@ pluginManagement {
             if (requested.id.id == "com.google.protobuf") { useVersion("0.9.4") } // https://github.com/google/protobuf-gradle-plugin/releases
             if (requested.id.id == "nu.studer.jooq") { useVersion("9.0") } // https://github.com/etiennestuder/gradle-jooq-plugin/releases
             if (requested.id.id == "org.flywaydb.flyway") { useVersion("9.22.3") } // https://github.com/flyway/flyway/releases
+            if (requested.id.id == "org.gradle.toolchains.foojay-resolver-convention") { useVersion("0.8.0") } // https://github.com/gradle/foojay-toolchains/tags
         }
     }
+}
+
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention")
 }
 
 dependencyResolutionManagement {
