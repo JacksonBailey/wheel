@@ -5,7 +5,7 @@ plugins {
 tasks {
     javadoc {
         options {
-            (this as CoreJavadocOptions).addStringOption("Xdoclint:none", "-quiet")
+            (this as CoreJavadocOptions).addBooleanOption("Xdoclint:-missing", true)
         }
     }
 }
