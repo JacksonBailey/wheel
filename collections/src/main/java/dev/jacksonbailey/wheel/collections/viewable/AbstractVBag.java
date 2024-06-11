@@ -4,6 +4,8 @@ import dev.jacksonbailey.wheel.collections.Bags;
 
 public abstract class AbstractVBag<E> implements VBag<E> {
 
+  public AbstractVBag() {}
+
   @Override
   public boolean equals(Object o) {
 

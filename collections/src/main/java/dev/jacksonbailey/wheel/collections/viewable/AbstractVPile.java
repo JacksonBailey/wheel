@@ -4,6 +4,8 @@ import dev.jacksonbailey.wheel.collections.Bags;
 
 public abstract class AbstractVPile<E> extends AbstractVBag<E> implements VPile<E> {
 
+  public AbstractVPile() {}
+
   @Override
   public boolean equals(Object o) {
 

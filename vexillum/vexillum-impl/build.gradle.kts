@@ -12,5 +12,6 @@ dependencies {
     runtimeOnly(project(":vexillum:vexillum-sqlite"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testRuntimeOnly("org.slf4j:slf4j-simple")
 }
