@@ -12,4 +12,5 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testImplementation("org.mockito:mockito-core")
     testImplementation("org.mockito:mockito-junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }

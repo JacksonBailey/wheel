@@ -27,6 +27,7 @@ dependencies {
     runtimeOnly("org.xerial:sqlite-jdbc")
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 val sqliteInitScript = "PRAGMA foreign_keys = ON;"

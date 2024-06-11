@@ -15,5 +15,6 @@ dependencies {
     testImplementation("junit:junit") // TODO Because GrpcCleanup uses JUnit 4 rule
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testRuntimeOnly("org.slf4j:slf4j-simple")
 }

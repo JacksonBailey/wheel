@@ -14,6 +14,7 @@ dependencies {
     implementation(platform(project(":platform")))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 protobuf {

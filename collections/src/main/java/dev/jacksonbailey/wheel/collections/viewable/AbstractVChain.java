@@ -5,6 +5,8 @@ import dev.jacksonbailey.wheel.collections.Bags;
 public abstract class AbstractVChain<E> extends AbstractVSuccession<E>
     implements VChain<E> {
 
+  public AbstractVChain() {}
+
   @Override
   public boolean equals(Object o) {
 

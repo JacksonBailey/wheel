@@ -5,6 +5,8 @@ import dev.jacksonbailey.wheel.collections.Bags;
 public abstract class AbstractVSuccession<E> extends AbstractVBag<E> implements
     VSuccession<E> {
 
+  public AbstractVSuccession() {}
+
   @Override
   public boolean equals(Object o) {
 
