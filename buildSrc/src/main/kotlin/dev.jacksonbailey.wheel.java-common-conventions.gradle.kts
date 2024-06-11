@@ -26,6 +26,16 @@ tasks {
         }
     }
 
+    javadoc {
+        options {
+            (this as CoreJavadocOptions).addMultilineStringsOption("tag").value = listOf(
+                "apiNote:a:API Note:",
+                "implSpec:a:Implementation Requirements:",
+                "implNote:a:Implementation Note:"
+            )
+        }
+    }
+
     assemble {
         dependsOn(tasks.withType<GenerateMavenPom>(), tasks.withType<GenerateModuleMetadata>())
     }
