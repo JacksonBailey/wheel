@@ -45,6 +45,15 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
+            // TODO Look more into this https://docs.gradle.org/8.8/userguide/publishing_maven.html#publishing_maven:resolved_dependencies
+            versionMapping {
+                usage("java-api") {
+                    fromResolutionOf("runtimeClasspath")
+                }
+                usage("java-runtime") {
+                    fromResolutionResult()
+                }
+            }
         }
     }
 }

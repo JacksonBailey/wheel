@@ -2,6 +2,7 @@ rootProject.name = "wheel"
 
 include(
     "collections",
+    "discord",
     "platform",
     "vexillum",
     "vexillum:vexillum-api",
