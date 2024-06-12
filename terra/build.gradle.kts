@@ -1,3 +1,6 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+import org.springframework.boot.gradle.tasks.run.BootRun
+
 plugins {
     id("dev.jacksonbailey.wheel.java-application-conventions")
     id("dev.jacksonbailey.wheel.shut-up-javadoc")
@@ -28,4 +31,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.boot:spring-boot-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks.getByName<BootJar>("bootJar") {
+    // TODO Does this mess up publishing somehow?
+    this.archiveFileName.set("${archiveBaseName.get()}.${archiveExtension.get()}")
 }

@@ -9,6 +9,15 @@ group of chat rooms. If you know Discord, then you know what a server refers to 
 waste my time explaining it lol. That said, I do know that the Discord API calls them "guilds" so
 things will probably get a little confusing. (Especially considering [Guilds][3] are a new feature).
 
+## Development
+
+1. To run, `./gradlew :terra:bootRun --args='--spring.profiles.active=live'`
+2. To set some default profiles,
+   `tasks.named<BootRun>("bootRun") { systemProperty("spring.profiles.active", "live") }`
+3. To run with Spring's debug mode, `./gradlew :terra:bootRun --args='--debug'`, [see here][5]
+4. Run the jar directly,
+   `./gradlew :terra:bootJar && java -jar terra/build/libs/terra.jar --spring.profiles.active=live`
+
 ## Notes
 
 I am going to use Spring Boot's [Dependency Management Plugin][4] instead of trying to use the
@@ -53,3 +62,5 @@ Execution failed for task ':discord:generateMetadataFileForMavenJavaPublication'
 [3]: https://support.discord.com/hc/en-us/articles/23187611406999-Guilds-FAQ
 
 [4]: https://docs.spring.io/dependency-management-plugin/docs/current/reference/html/
+
+[5]: https://stackoverflow.com/a/71402717/1858327
