@@ -47,6 +47,9 @@ Execution failed for task ':discord:generateMetadataFileForMavenJavaPublication'
 ```
 
 [1]: https://www.terraform.io/
+
 [2]: https://aws.amazon.com/lambda/
+
 [3]: https://support.discord.com/hc/en-us/articles/23187611406999-Guilds-FAQ
+
 [4]: https://docs.spring.io/dependency-management-plugin/docs/current/reference/html/

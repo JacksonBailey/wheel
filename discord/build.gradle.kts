@@ -12,11 +12,13 @@ dependencyManagement {
     }
     dependencies {
         dependency("org.jetbrains:annotations:24.1.0")
+        dependency("net.dv8tion:JDA:5.0.0-beta.24")
     }
 }
 
 dependencies {
     compileOnly("org.jetbrains:annotations")
+    implementation("net.dv8tion:JDA") { exclude(module = "opus-java") }
     implementation("org.springframework.boot:spring-boot")
     implementation("org.springframework.boot:spring-boot-autoconfigure")
     implementation("org.springframework.boot:spring-boot-starter")
