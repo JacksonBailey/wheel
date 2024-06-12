@@ -1,4 +1,4 @@
-package dev.jacksonbailey.wheel.discord;
+package dev.jacksonbailey.wheel.terra;
 
 import net.dv8tion.jda.api.JDABuilder;
 import org.springframework.context.annotation.Bean;

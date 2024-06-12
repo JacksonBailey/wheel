@@ -1,4 +1,4 @@
-package dev.jacksonbailey.wheel.discord;
+package dev.jacksonbailey.wheel.terra;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

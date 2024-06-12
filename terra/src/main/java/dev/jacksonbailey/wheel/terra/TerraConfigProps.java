@@ -1,4 +1,4 @@
-package dev.jacksonbailey.wheel.discord;
+package dev.jacksonbailey.wheel.terra;
 
 import java.net.URI;
 import org.springframework.boot.context.properties.ConfigurationProperties;
