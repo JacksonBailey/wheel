@@ -1,6 +1,6 @@
 package dev.jacksonbailey.wheel.vexillum.impl.test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import dev.jacksonbailey.wheel.vexillum.impl.Sample;
 import org.junit.jupiter.api.Test;

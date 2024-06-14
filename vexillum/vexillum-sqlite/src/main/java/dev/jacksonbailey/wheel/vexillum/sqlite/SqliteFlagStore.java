@@ -2,8 +2,8 @@ package dev.jacksonbailey.wheel.vexillum.sqlite;
 
 import static dev.jacksonbailey.wheel.vexillum.sqlite.jooq.Tables.FLAG;
 
-import dev.jacksonbailey.wheel.vexillum.sqlite.jooq.tables.records.FlagRecord;
 import dev.jacksonbailey.wheel.vexillum.FlagStore;
+import dev.jacksonbailey.wheel.vexillum.sqlite.jooq.tables.records.FlagRecord;
 import java.util.Optional;
 import java.util.function.Supplier;
 import org.flywaydb.core.Flyway;

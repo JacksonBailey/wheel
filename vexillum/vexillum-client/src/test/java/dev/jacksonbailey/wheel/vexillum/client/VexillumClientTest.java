@@ -3,9 +3,7 @@ package dev.jacksonbailey.wheel.vexillum.client;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.AdditionalAnswers.delegatesTo;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 import dev.jacksonbailey.wheel.vexillum.api.FlagServiceGrpc;
 import dev.jacksonbailey.wheel.vexillum.api.GetFlagStateReply;
@@ -22,7 +20,6 @@ import java.util.List;
 import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 
 
 /**
