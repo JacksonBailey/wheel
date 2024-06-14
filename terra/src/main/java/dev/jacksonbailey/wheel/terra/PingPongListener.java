@@ -1,26 +1,13 @@
 package dev.jacksonbailey.wheel.terra;
 
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PingPong extends ListenerAdapter {
-
-  private static final Logger log = LoggerFactory.getLogger(PingPong.class);
-
-  private final JDA jda;
-
-  public PingPong(JDA jda) {
-    this.jda = jda;
-    // TODO This is wrong wrong wrong!
-    jda.addEventListener(this);
-  }
+public class PingPongListener extends ListenerAdapter {
 
   @Override
   public void onMessageReceived(MessageReceivedEvent event) {
