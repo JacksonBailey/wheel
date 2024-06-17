@@ -1,7 +1,9 @@
-package dev.jacksonbailey.wheel.terra;
+package dev.jacksonbailey.wheel.terra.service;
 
+import static java.util.Objects.requireNonNull;
+
+import dev.jacksonbailey.wheel.terra.model.JDAReadyEventAdapter;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
@@ -35,25 +37,33 @@ public class Foo {
   }
 
 
-  @EventListener(JDAEventAdapter.class)
+  @EventListener(JDAReadyEventAdapter.class)
   public void doStuff() throws InterruptedException {
     log.info("Here we go!");
-    Guild guild = jda.getGuildById(targetGuildId);
+    Guild guild = getGuild();
+    var textChannel = guild.createTextChannel("foo").complete();
+    log.info("Made {}", textChannel);
+    listChannels(guild);
+    textChannel.delete().onSuccess(v -> log.info("Deleted {}", textChannel)).complete();
+    getGuild();
+    SpringApplication.exit(applicationContext, () -> 1);
+  }
+
+  private Guild getGuild() {
+    var guild = requireNonNull(jda.getGuildById(targetGuildId),
+        "No such connected guild id " + targetGuildId);
     log.info(String.valueOf(guild));
-    if (guild == null) {
-      log.error("Null guild, oops");
-      return;
-    }
+    listChannels(guild);
+    return guild;
+  }
+
+  private static void listChannels(Guild guild) {
+    log.info("Channels are...");
     List<GuildChannel> channels = guild.getChannels();
     for (GuildChannel channel : channels) {
       log.info(String.valueOf(channel));
     }
-    log.info("All done.");
-    var textChannel = guild.createTextChannel("foo").complete();
-    log.info("Made {}", textChannel);
-    var blah = textChannel.delete().onSuccess(v -> log.info("Deleted {}", textChannel)).complete();
-    TimeUnit.SECONDS.sleep(1);
-    SpringApplication.exit(applicationContext, () -> 1);
+    log.info("...done");
   }
 
 }

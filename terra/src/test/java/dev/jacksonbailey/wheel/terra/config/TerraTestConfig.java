@@ -1,4 +1,4 @@
-package dev.jacksonbailey.wheel.terra;
+package dev.jacksonbailey.wheel.terra.config;
 
 import static org.mockito.Mockito.mock;
 
