@@ -6,7 +6,6 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.hooks.EventListener;
-import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -26,7 +25,6 @@ public class TerraConfig {
       ObjectProvider<EventListener> listenerProvider) {
     JDABuilder builder = JDABuilder.createDefault(terraConfigProps.token());
     listenerProvider.orderedStream().forEach(builder::addEventListeners);
-    builder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
     return builder;
   }
 
