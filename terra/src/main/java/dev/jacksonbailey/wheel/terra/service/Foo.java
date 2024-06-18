@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import dev.jacksonbailey.wheel.terra.model.JDAReadyEventAdapter;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
@@ -14,6 +15,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -36,9 +38,9 @@ public class Foo {
     this.applicationContext = applicationContext;
   }
 
-
+  @Async
   @EventListener(JDAReadyEventAdapter.class)
-  public void doStuff() throws InterruptedException {
+  public void doStuff() {
     log.info("Here we go!");
     Guild guild = getGuild();
     var textChannel = guild.createTextChannel("foo").complete();
@@ -46,7 +48,10 @@ public class Foo {
     listChannels(guild);
     textChannel.delete().onSuccess(v -> log.info("Deleted {}", textChannel)).complete();
     getGuild();
-    SpringApplication.exit(applicationContext, () -> 1);
+    jda.shutdown();
+    CompletableFuture.runAsync(
+        () -> SpringApplication.exit(applicationContext)
+    );
   }
 
   private Guild getGuild() {
