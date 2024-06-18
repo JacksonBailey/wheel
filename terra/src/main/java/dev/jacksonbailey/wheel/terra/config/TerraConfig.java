@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.hooks.EventListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -35,9 +36,10 @@ public class TerraConfig {
 
   @Bean
   @Profile("live")
-  public JDA jda(JDABuilder jdaBuilder, Collection<Permission> requiredPermissions) {
+  public JDA jda(JDABuilder jdaBuilder, Collection<Permission> requiredPermissions,
+      @Value("${bot.target-guild-id}") long targetGuildId) {
     JDA jda = jdaBuilder.build();
-    log.info("Invite URL: {}", jda.getInviteUrl(requiredPermissions));
+    log.info("Invite URL: {}&guild_id={}", jda.getInviteUrl(requiredPermissions), targetGuildId);
     return jda;
   }
 

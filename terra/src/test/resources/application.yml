@@ -1,4 +1,4 @@
 bot:
   application-id: '1337'
-  oauth: 'https://discord.com/api/oauth2/authorize?client_id=1337&scope=bot'
+  target-guild-id: '80085'
   token: 'a.secret.to.everyone.'
