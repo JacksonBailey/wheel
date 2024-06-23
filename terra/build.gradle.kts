@@ -3,6 +3,7 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 plugins {
     id("dev.jacksonbailey.wheel.java-application-conventions")
     id("dev.jacksonbailey.wheel.shut-up-javadoc")
+    id("io.freefair.lombok") version "8.6"
     id("io.spring.dependency-management") version "1.1.5"
     id("org.springframework.boot") version "3.3.0"
 }
@@ -13,9 +14,13 @@ dependencyManagement {
         mavenBom("org.springframework.boot:spring-boot-dependencies:3.3.0")
     }
     dependencies {
-        dependency("org.jetbrains:annotations:24.1.0")
         dependency("net.dv8tion:JDA:5.0.0-beta.24")
+        dependency("org.jetbrains:annotations:24.1.0")
     }
+}
+
+lombok {
+    version = "1.18.32" // https://mvnrepository.com/artifact/org.projectlombok/lombok
 }
 
 dependencies {
