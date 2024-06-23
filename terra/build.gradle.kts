@@ -1,6 +1,7 @@
 import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
+    id("com.ryandens.javaagent-test") version "0.5.1"
     id("dev.jacksonbailey.wheel.java-application-conventions")
     id("dev.jacksonbailey.wheel.shut-up-javadoc")
     id("io.freefair.lombok") version "8.6"
@@ -34,6 +35,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.boot:spring-boot-test")
+    testJavaagent("net.bytebuddy:byte-buddy-agent")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
