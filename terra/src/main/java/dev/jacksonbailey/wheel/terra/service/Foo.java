@@ -1,18 +1,14 @@
 package dev.jacksonbailey.wheel.terra.service;
 
-import static java.util.Objects.requireNonNull;
+import static dev.jacksonbailey.wheel.terra.service.EchoListener.ECHO_COMMAND_NAME;
+import static dev.jacksonbailey.wheel.terra.service.EchoListener.ECHO_PARAM_NAME;
 
 import dev.jacksonbailey.wheel.terra.model.JDAReadyEventAdapter;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
@@ -26,49 +22,18 @@ public class Foo {
 
   private final JDA jda;
 
-  private final long targetGuildId;
-
-  private final ApplicationContext applicationContext;
-
-  public Foo(JDA jda,
-      @Value("${bot.target-guild-id}") long targetGuildId,
-      ApplicationContext applicationContext) {
+  public Foo(JDA jda) {
     this.jda = jda;
-    this.targetGuildId = targetGuildId;
-    this.applicationContext = applicationContext;
   }
 
   @Async
   @EventListener(JDAReadyEventAdapter.class)
   public void doStuff() {
     log.info("Here we go!");
-    Guild guild = getGuild();
-    var textChannel = guild.createTextChannel("foo").complete();
-    log.info("Made {}", textChannel);
-    listChannels(guild);
-    textChannel.delete().onSuccess(v -> log.info("Deleted {}", textChannel)).complete();
-    getGuild();
-    jda.shutdown();
-    CompletableFuture.runAsync(
-        () -> SpringApplication.exit(applicationContext)
-    );
-  }
-
-  private Guild getGuild() {
-    var guild = requireNonNull(jda.getGuildById(targetGuildId),
-        "No such connected guild id " + targetGuildId);
-    log.info(String.valueOf(guild));
-    listChannels(guild);
-    return guild;
-  }
-
-  private static void listChannels(Guild guild) {
-    log.info("Channels are...");
-    List<GuildChannel> channels = guild.getChannels();
-    for (GuildChannel channel : channels) {
-      log.info(String.valueOf(channel));
-    }
-    log.info("...done");
+    jda.upsertCommand(
+        Commands.slash(ECHO_COMMAND_NAME, "Says it right back")
+                .addOption(OptionType.STRING, ECHO_PARAM_NAME, "The thing to say")
+    ).queue();
   }
 
 }
