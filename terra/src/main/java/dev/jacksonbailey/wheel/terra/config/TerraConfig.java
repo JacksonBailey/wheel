@@ -37,9 +37,10 @@ public class TerraConfig {
   @Bean
   @Profile("live")
   public JDA jda(JDABuilder jdaBuilder, Collection<Permission> requiredPermissions,
-      @Value("${bot.target-guild-id}") long targetGuildId) {
+      @Value("${bot.target-guild-id}") long targetGuildId) throws InterruptedException {
     JDA jda = jdaBuilder.build();
     log.info("Invite URL: {}&guild_id={}", jda.getInviteUrl(requiredPermissions), targetGuildId);
+    jda.awaitReady();
     return jda;
   }
 
