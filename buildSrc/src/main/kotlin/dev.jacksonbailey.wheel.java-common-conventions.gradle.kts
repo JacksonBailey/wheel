@@ -13,7 +13,8 @@ java {
 
 tasks {
     withType<JavaCompile> {
-        options.compilerArgs.add("-Xlint:all")
+        // TODO Check that -g is actually adding debug info because it seems like it's already there
+        options.compilerArgs.addAll(listOf("-Xlint:all", "-g"))
     }
 
     named<Test>("test") {
