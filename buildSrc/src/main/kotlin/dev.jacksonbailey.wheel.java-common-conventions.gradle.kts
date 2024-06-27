@@ -24,6 +24,7 @@ tasks {
     withType<Jar> {
         metaInf {
             from(layout.projectDirectory.file("LICENSE"))
+            from(layout.projectDirectory.file("LICENSE.LESSER"))
         }
     }
 
