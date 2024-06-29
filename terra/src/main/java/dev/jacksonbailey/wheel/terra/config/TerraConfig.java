@@ -5,10 +5,8 @@ import java.util.EnumSet;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.Permission;
-import net.dv8tion.jda.api.hooks.EventListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,11 +20,8 @@ public class TerraConfig {
 
   @Bean
   @Scope("prototype")
-  public JDABuilder jdaBuilder(TerraConfigProps terraConfigProps,
-      ObjectProvider<EventListener> listenerProvider) {
-    JDABuilder builder = JDABuilder.createDefault(terraConfigProps.token());
-    listenerProvider.orderedStream().forEach(builder::addEventListeners);
-    return builder;
+  public JDABuilder jdaBuilder(TerraConfigProps terraConfigProps) {
+    return JDABuilder.createDefault(terraConfigProps.token());
   }
 
   @Bean

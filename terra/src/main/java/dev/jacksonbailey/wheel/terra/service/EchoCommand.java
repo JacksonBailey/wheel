@@ -1,17 +1,30 @@
 package dev.jacksonbailey.wheel.terra.service;
 
-import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EchoListener extends AbstractCommand {
+public class EchoCommand extends AbstractCommand {
 
   public static final String ECHO_COMMAND_NAME = "echo";
   public static final String ECHO_PARAM_NAME = "message";
+
+  public EchoCommand(JDA jda) {
+    super(jda);
+  }
+
+  @Override
+  public CommandData getCommandData() {
+    return Commands.slash(ECHO_COMMAND_NAME, "Says it right back")
+                   .addOption(OptionType.STRING, ECHO_PARAM_NAME, "The thing to say");
+  }
 
   @Override
   public MessageCreateData doCommand(@NotNull SlashCommandInteractionEvent event) {
