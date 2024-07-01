@@ -1,0 +1,7 @@
+logging:
+  level:
+    net:
+      dv8tion:
+        jda: DEBUG
+    dev:
+      jacksonbailey: DEBUG

@@ -23,7 +23,7 @@ public class EchoCommand extends AbstractCommand {
   @Override
   public CommandData getCommandData() {
     return Commands.slash(ECHO_COMMAND_NAME, "Says it right back")
-                   .addOption(OptionType.STRING, ECHO_PARAM_NAME, "The thing to say");
+                   .addOption(OptionType.STRING, ECHO_PARAM_NAME, "The thing to say", true);
   }
 
   @Override
