@@ -1,5 +1,6 @@
 plugins {
     id("dev.jacksonbailey.wheel.base-common-conventions")
+    jacoco
     java
 }
 
@@ -11,16 +12,29 @@ java {
     withSourcesJar()
 }
 
+jacoco {
+    toolVersion = "0.8.12" // https://www.jacoco.org/jacoco/
+}
+
 tasks {
     withType<JavaCompile> {
         // TODO Check that -g is actually adding debug info because it seems like it's already there
         options.compilerArgs.addAll(listOf("-Xlint:all", "-g"))
     }
 
-    named<Test>("test") {
+    test {
         useJUnitPlatform()
+        finalizedBy(tasks.jacocoTestReport)
     }
 
+    jacocoTestReport {
+        dependsOn(tasks.test)
+    }
+
+    /*
+     * Using jar { } will only apply to tasks named "jar" so the license would not end up in the
+     * javadoc jar nor source jar.
+     */
     withType<Jar> {
         metaInf {
             from(layout.projectDirectory.file("LICENSE"))
