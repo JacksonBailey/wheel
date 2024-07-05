@@ -1,6 +1,7 @@
 package dev.jacksonbailey.wheel.terra.service;
 
 import dev.jacksonbailey.wheel.terra.model.ChannelDefinition;
+import java.util.stream.Collectors;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -10,8 +11,6 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,8 +18,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class GetChannelsCommand extends AbstractCommand {
-
-  private static final Logger log = LoggerFactory.getLogger(GetChannelsCommand.class);
 
   public static String COMMAND_NAME = "get-channels";
 
@@ -42,9 +39,10 @@ public class GetChannelsCommand extends AbstractCommand {
     var sourceGuild = event.getGuild();
     assert sourceGuild != null; // TODO Improve this??
 
-    var channelDefinitions = sourceGuild.getChannels().stream()
+    var channelDefinitions = sourceGuild.getChannels()
+                                        .stream()
                                         .map(ChannelDefinition::from)
-                                        .toList();
+                                        .collect(Collectors.toSet());
 
     var builder = new MessageCreateBuilder();
     return builder.addContent(channelDefinitions.toString()).build();
