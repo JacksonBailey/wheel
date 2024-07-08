@@ -8,6 +8,11 @@ import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
 import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Resets all registered commands. Only for troubleshooting. In theory all commands should be
+ * updating when the application starts, but it seems like there may have been a delay or something.
+ * This is just in case.
+ */
 public class ResetCommandsCommand extends AbstractCommand {
 
   public ResetCommandsCommand(JDA jda) {

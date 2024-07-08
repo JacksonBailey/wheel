@@ -1,6 +1,16 @@
 Reinventing the wheel
 =====================
 
+Foreword
+--------
+
+This repository has become more of a monorepo for Java projects I want to fiddle around with than a
+specific collection of "reinvented wheels." This makes it easy to just jump in and hack away without
+wasting time on how to set up projects "correctly." Versioning seems annoying in monorepos, but I
+also don't see myself actually *releasing* anything in the foreseeable future. I'll deal with that
+when I get to it, if ever. I still plan to make notes about things I learn along the way and to make
+detailed commit messages, so hopefully this is still a useful resource for folks.
+
 Introduction
 ------------
 
@@ -57,8 +67,11 @@ Licensing
 
 As a whole this repository is licensed under [AGPL-3.0-or-later][agpl]. Each individual subproject
 may have different licenses. As an example, the collections project uses [LGPL-3.0-or-later][lgpl].
+See the `LICENSE` (and `LICENSE.LESSER` if present) file(s) for details. These should also be
+included in jar files built by this project.
 
 [agpl]: https://www.gnu.org/licenses/agpl-3.0.txt
+
 [lgpl]: https://www.gnu.org/licenses/lgpl-3.0.txt
 
 Development guide

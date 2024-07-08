@@ -10,6 +10,9 @@ import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
+/**
+ * Echos a phrase back to the user. This is really only for troubleshooting.
+ */
 @Service
 public class EchoCommand extends AbstractCommand {
 

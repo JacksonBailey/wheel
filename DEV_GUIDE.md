@@ -60,3 +60,8 @@ You can drill down with `reason` on a specific project and dependency like so.
 ```shell
 ./gradlew :vexillum:vexillum-core:reason --id org.junit.jupiter:junit-jupiter-api
 ```
+
+Planning future tasks
+---------------------
+
+This project uses `TODO` comments to indicate potential future tasks.
