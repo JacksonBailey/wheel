@@ -12,6 +12,9 @@ import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.concrete.VoiceChannel;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Defines a channel and how it should be configured.
+ */
 public interface ChannelDefinition {
 
   String name();

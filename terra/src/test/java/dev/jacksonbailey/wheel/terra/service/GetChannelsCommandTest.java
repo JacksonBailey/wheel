@@ -1,5 +1,6 @@
 package dev.jacksonbailey.wheel.terra.service;
 
+import static dev.jacksonbailey.wheel.terra.TestUtils.mockTextChannel;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -9,8 +10,6 @@ import java.util.List;
 import java.util.Set;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.channel.ChannelType;
-import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.entities.channel.middleman.GuildChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import org.junit.jupiter.api.Test;
@@ -31,10 +30,8 @@ class GetChannelsCommandTest {
     var event = mock(SlashCommandInteractionEvent.class);
     var guild = mock(Guild.class);
     given(event.getGuild()).willReturn(guild);
-    var textChannel = mock(TextChannel.class);
     var textChannelName = "text channel";
-    given(textChannel.getName()).willReturn(textChannelName);
-    given(textChannel.getType()).willReturn(ChannelType.TEXT);
+    var textChannel = mockTextChannel(textChannelName);
     List<GuildChannel> channels = List.of(textChannel);
     given(guild.getChannels()).willReturn(channels);
 
