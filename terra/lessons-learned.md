@@ -102,3 +102,11 @@ public JDABuilder jdaBuilder(ObjectProvider<ListenerAdapter> listenerProvider) {
   return builder;
 }
 ```
+
+## Semantic Line Breaks
+
+I installed the Grazie Pro plugin. (Very confusingly named, it has a few features even without a
+subscription.) It suggests "structural line breaks" and points to
+[Semantic Line Breaks](https://sembr.org/). It's interesting. It suggests wrapping text lines in
+things like Markdown at the end of sentences/clauses/thoughts. I'll consider it but will likely
+pass.
