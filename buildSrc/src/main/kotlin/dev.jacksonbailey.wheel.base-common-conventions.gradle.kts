@@ -33,10 +33,10 @@ publishing {
     publications {
         withType<MavenPublication>() {
             pom {
-                val gitHubUrl = "https://github.com/JacksonBailey/wheel"
+                val codebergUrl = "https://codeberg.org/JacksonBailey/wheel"
                 name.set("${groupId}:${artifactId}")
                 description.set("Reinventing ${artifactId}")
-                url.set(gitHubUrl)
+                url.set(codebergUrl)
                 licenses {
                     license {
                         name.set(licenseName)
@@ -50,9 +50,9 @@ publishing {
                     }
                 }
                 scm {
-                    connection.set("scm:git:${gitHubUrl}.git")
-                    developerConnection.set("scm:git:${gitHubUrl}.git")
-                    url.set(validUri(gitHubUrl))
+                    connection.set("scm:git:${codebergUrl}.git")
+                    developerConnection.set("scm:git:${codebergUrl}.git")
+                    url.set(validUri(codebergUrl))
                 }
             }
         }

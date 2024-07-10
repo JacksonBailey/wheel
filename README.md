@@ -1,6 +1,10 @@
 Reinventing the wheel
 =====================
 
+*If you're reading this on [GitHub](https://github.com/JacksonBailey/wheel), this project has
+migrated to [Codeberg](https://codeberg.org/JacksonBailey/wheel). Changes may be periodically synced
+back to GitHub.*
+
 Foreword
 --------
 
